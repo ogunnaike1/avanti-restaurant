@@ -29,8 +29,8 @@ npm run build   # production build
 The supplied AVANTI artwork lives in `public/` as three prepared PNGs, rendered through `<Logo>`:
 
 ```tsx
-<Logo variant="stacked" priority />  // monogram over wordmark — hero, footer
-<Logo variant="wordmark" />          // horizontal, for tight spaces — header, drawer
+<Logo variant="stacked" priority />  // monogram over wordmark — header, hero, drawer, footer
+<Logo variant="wordmark" />          // horizontal, for tight spaces
 <Logo variant="monogram" />          // the swash A — page heroes, booking confirmation
 ```
 

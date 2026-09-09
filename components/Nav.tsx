@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import Logo from "./Logo";
 import ReserveButton from "./ReserveButton";
 
@@ -18,9 +18,16 @@ export default function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 40));
+  // A plain scroll listener rather than Framer's scroll tracking: this has to be
+  // right even when animation frames are throttled, and it also settles correctly
+  // when the page is reloaded partway down.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -36,16 +43,13 @@ export default function Nav() {
 
   return (
     <>
-      <motion.nav
+      <nav
         aria-label="Primary"
-        animate={{
-          backgroundColor: scrolled ? "rgba(56,1,9,0.92)" : "rgba(56,1,9,0)",
-          paddingTop: scrolled ? 10 : 16,
-          paddingBottom: scrolled ? 10 : 16,
-          borderColor: scrolled ? "rgba(142,111,87,0.28)" : "rgba(218,176,97,0)",
-        }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        className="fixed inset-x-0 top-0 z-[60] flex items-center justify-between gap-5 border-b px-[clamp(18px,5vw,64px)] backdrop-blur-[6px]"
+        className={`fixed inset-x-0 top-0 z-[60] flex items-center justify-between gap-5 border-b px-[clamp(18px,5vw,64px)] backdrop-blur-[6px] transition-all duration-500 ease-out ${
+          scrolled
+            ? "border-taupe/30 bg-[rgba(56,1,9,0.92)] py-2.5"
+            : "border-transparent bg-transparent py-4"
+        }`}
       >
         <Link href="/" aria-label="AVANTI home" className="block">
           <Logo
@@ -83,45 +87,42 @@ export default function Nav() {
           <span className="block h-px w-[26px] bg-cream" />
           <span className="block h-px w-4 bg-gold" />
         </button>
-      </motion.nav>
+      </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="drawer"
-            initial={{ x: "104%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "104%" }}
-            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[70] flex flex-col justify-center gap-1.5 bg-wine p-[clamp(28px,8vw,72px)]"
+      {open && (
+        <motion.div
+          key="drawer"
+          initial={{ x: "104%" }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[70] flex flex-col justify-center gap-1.5 bg-wine p-[clamp(28px,8vw,72px)]"
+        >
+          <button
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            className="absolute right-[clamp(18px,5vw,64px)] top-6 font-serif text-3xl leading-none text-sand"
           >
-            <button
-              onClick={() => setOpen(false)}
-              aria-label="Close menu"
-              className="absolute right-[clamp(18px,5vw,64px)] top-6 font-serif text-3xl leading-none text-sand"
+            &times;
+          </button>
+          <Logo variant="stacked" className="mb-8 h-auto w-[190px]" />
+          <p className="eyebrow mb-6 text-taupe">Menu</p>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="border-b border-taupe/35 py-4 font-serif text-[34px] text-cream"
             >
-              &times;
-            </button>
-            <Logo variant="stacked" className="mb-8 h-auto w-[190px]" />
-            <p className="eyebrow mb-6 text-taupe">Menu</p>
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="border-b border-taupe/35 py-4 font-serif text-[34px] text-cream"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <ReserveButton
-              onClick={() => setOpen(false)}
-              className="mt-5 border border-gold bg-gold px-6 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-wine"
-            >
-              Reserve a Table
-            </ReserveButton>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {link.label}
+            </Link>
+          ))}
+          <ReserveButton
+            onClick={() => setOpen(false)}
+            className="mt-5 border border-gold bg-gold px-6 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-wine"
+          >
+            Reserve a Table
+          </ReserveButton>
+        </motion.div>
+      )}
     </>
   );
 }
