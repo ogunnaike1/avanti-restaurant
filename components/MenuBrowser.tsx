@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import ImageSlot from "./ImageSlot";
 import { menu, type MenuGroup } from "@/lib/menu";
 
@@ -19,7 +19,8 @@ const fold = (value: string) =>
     .replace(/\p{Diacritic}/gu, "")
     .toLowerCase();
 
-const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /** Marks the matched run inside a field, when it survives accent folding. */
 function Highlight({ text, query }: { text: string; query: string }) {
@@ -44,8 +45,10 @@ function Highlight({ text, query }: { text: string; query: string }) {
   );
 }
 
-const haystack = (item: { name: string; description: string; tag?: string }, section: string) =>
-  fold(`${item.name} ${item.description} ${item.tag ?? ""} ${section}`);
+const haystack = (
+  item: { name: string; description: string; tag?: string },
+  section: string,
+) => fold(`${item.name} ${item.description} ${item.tag ?? ""} ${section}`);
 
 export default function MenuBrowser() {
   const [active, setActive] = useState<FilterId>("all");
@@ -55,13 +58,16 @@ export default function MenuBrowser() {
 
   /** Sections matching the chip, then items matching the search; empty sections drop out. */
   const groups: MenuGroup[] = useMemo(() => {
-    const inSection = active === "all" ? menu : menu.filter((group) => group.id === active);
+    const inSection =
+      active === "all" ? menu : menu.filter((group) => group.id === active);
     if (!term) return inSection;
 
     return inSection
       .map((group) => ({
         ...group,
-        items: group.items.filter((item) => haystack(item, group.title).includes(term)),
+        items: group.items.filter((item) =>
+          haystack(item, group.title).includes(term),
+        ),
       }))
       .filter((group) => group.items.length > 0);
   }, [active, term]);
@@ -72,7 +78,9 @@ export default function MenuBrowser() {
   const matchesElsewhere =
     term.length > 0 &&
     active !== "all" &&
-    menu.some((group) => group.items.some((item) => haystack(item, group.title).includes(term)));
+    menu.some((group) =>
+      group.items.some((item) => haystack(item, group.title).includes(term)),
+    );
 
   return (
     <>
@@ -162,72 +170,75 @@ export default function MenuBrowser() {
             </div>
           )}
 
-          <AnimatePresence mode="popLayout">
-            {groups.map((group) => (
-              <motion.div
-                key={group.id}
-                layout
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="mb-9 flex items-baseline gap-5">
-                  <h2 className="m-0 font-serif text-[clamp(30px,4vw,50px)] font-light text-wine">
-                    {group.title}
-                  </h2>
-                  <span className="h-px flex-1 bg-taupe/35" />
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-taupe">
-                    {String(group.items.length).padStart(2, "0")}
-                  </span>
-                </div>
+          {groups.map((group) => (
+            <motion.div
+              key={`${group.id}-${term}`}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="mb-9 flex items-baseline gap-5">
+                <h2 className="m-0 font-serif text-[clamp(30px,4vw,50px)] font-light text-wine">
+                  {group.title}
+                </h2>
+                <span className="h-px flex-1 bg-taupe/35" />
+                <span className="text-[10px] uppercase tracking-[0.3em] text-taupe">
+                  {String(group.items.length).padStart(2, "0")}
+                </span>
+              </div>
 
-                <div className="grid gap-x-[clamp(30px,5vw,72px)] gap-y-2 lg:grid-cols-2">
-                  {group.items.map((item, i) => (
-                    <motion.div
-                      key={item.name}
-                      layout
-                      initial={{ opacity: 0, y: 16 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-40px" }}
-                      transition={{ duration: 0.45, delay: Math.min(i * 0.05, 0.25) }}
-                      className="flex min-w-0 items-start gap-4 border-b border-taupe/20 py-4.5 sm:gap-5"
-                    >
-                      <div className="size-[76px] shrink-0 overflow-hidden sm:size-[92px]">
-                        <ImageSlot src={item.image} label={item.name} sizes="92px" />
-                      </div>
+              <div className="grid gap-x-[clamp(30px,5vw,72px)] gap-y-2 lg:grid-cols-2">
+                {group.items.map((item, i) => (
+                  <motion.div
+                    key={item.name}
+                    layout
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: Math.min(i * 0.04, 0.2),
+                    }}
+                    className="flex min-w-0 items-start gap-4 border-b border-taupe/20 py-4.5 sm:gap-5"
+                  >
+                    <div className="size-[76px] shrink-0 overflow-hidden sm:size-[92px]">
+                      <ImageSlot
+                        src={item.image}
+                        label={item.name}
+                        sizes="92px"
+                      />
+                    </div>
 
-                      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                        <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
-                          <h3 className="m-0 min-w-0 font-serif text-[19px] font-medium text-balance text-ink sm:text-[22px]">
-                            <Highlight text={item.name} query={query} />
-                          </h3>
-                          <span className="hidden -translate-y-1 flex-1 border-b border-dotted border-taupe/55 sm:block" />
-                          <span className="ml-auto shrink-0 text-[15px] text-wine sm:ml-0">
-                            {item.price}
-                          </span>
-                        </div>
-                        <p className="m-0 text-[13.5px] font-light leading-[1.7] text-clay text-pretty">
-                          <Highlight text={item.description} query={query} />
-                        </p>
-                        {item.tag && (
-                          <span
-                            className={`mt-1 self-start px-2.5 py-1 text-[9px] uppercase tracking-[0.24em] ${
-                              item.featured
-                                ? "bg-gold text-wine"
-                                : "border border-taupe/40 text-taupe"
-                            }`}
-                          >
-                            {item.tag}
-                          </span>
-                        )}
+                    <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                      <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <h3 className="m-0 min-w-0 font-serif text-[19px] font-medium text-balance text-ink sm:text-[22px]">
+                          <Highlight text={item.name} query={query} />
+                        </h3>
+                        <span className="hidden -translate-y-1 flex-1 border-b border-dotted border-taupe/55 sm:block" />
+                        <span className="ml-auto shrink-0 text-[15px] text-wine sm:ml-0">
+                          {item.price}
+                        </span>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+                      <p className="m-0 text-[13.5px] font-light leading-[1.7] text-clay text-pretty">
+                        <Highlight text={item.description} query={query} />
+                      </p>
+                      {item.tag && (
+                        <span
+                          className={`mt-1 self-start px-2.5 py-1 text-[9px] uppercase tracking-[0.24em] ${
+                            item.featured
+                              ? "bg-gold text-wine"
+                              : "border border-taupe/40 text-taupe"
+                          }`}
+                        >
+                          {item.tag}
+                        </span>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
     </>
