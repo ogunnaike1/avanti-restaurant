@@ -142,11 +142,34 @@ async function build(src, out, { crop, pad = 0.07, feather = 0.13, width } = {})
     feather: 0.16,
   });
 
-  // Favicon keeps the maroon ground — it needs to read as a solid tile.
-  await sharp(src)
-    .extract({ left: 380, top: 190, width: 540, height: 450 })
-    .resize({ width: 256, height: 256, fit: "contain", background: "#330107" })
-    .png()
-    .toFile(path.join(ROOT, "app", "icon.png"));
-  console.log("app/icon.png 256x256");
+  /*
+   * App icons. These keep a solid wine ground on purpose: iOS composites an
+   * "Add to Home Screen" icon onto black, so a transparent PNG would show the
+   * mark floating on a black tile. Full-bleed square — iOS rounds the corners
+   * itself, and Android masks it.
+   */
+  const tile = async (size, out, markScale = 0.68) => {
+    // The prepared monogram, not a raw crop: it is already keyed to transparency,
+    // so it sits on the wine ground without a visible tile of its own.
+    const mark = await sharp(path.join(PUBLIC, "avanti-monogram.png"))
+      .resize({ width: Math.round(size * markScale), fit: "inside" })
+      .toBuffer();
+
+    await sharp({
+      create: { width: size, height: size, channels: 4, background: "#380109" },
+    })
+      .composite([{ input: mark, gravity: "centre" }])
+      .png({ compressionLevel: 9 })
+      .toFile(out);
+    console.log(`${path.relative(ROOT, out)} ${size}x${size}`);
+  };
+
+  await tile(256, path.join(ROOT, "app", "icon.png"));
+  // iOS home screen.
+  await tile(180, path.join(ROOT, "app", "apple-icon.png"));
+  // Web app manifest (Android / desktop install). The maskable one keeps the
+  // mark well inside the safe zone so a circular mask cannot clip it.
+  await tile(192, path.join(PUBLIC, "icon-192.png"));
+  await tile(512, path.join(PUBLIC, "icon-512.png"));
+  await tile(512, path.join(PUBLIC, "icon-maskable-512.png"), 0.46);
 })();

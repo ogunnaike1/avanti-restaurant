@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -25,6 +25,18 @@ export const metadata: Metadata = {
   title: "AVANTI — Modern Classic Dining, Ibadan",
   description:
     "AVANTI — a modern classic restaurant where timeless flavours meet contemporary elegance. Reserve a table.",
+  applicationName: "AVANTI",
+  // What iOS uses when the site is saved to the home screen. The icon itself is
+  // app/apple-icon.png, which Next links as apple-touch-icon.
+  appleWebApp: {
+    capable: true,
+    title: "AVANTI",
+    statusBarStyle: "black-translucent",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#380109",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
