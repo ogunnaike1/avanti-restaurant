@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import ImageSlot from "./ImageSlot";
 import { menu, type MenuGroup } from "@/lib/menu";
 
 const filters = [
@@ -69,29 +70,41 @@ export default function MenuBrowser() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-40px" }}
                       transition={{ duration: 0.45, delay: Math.min(i * 0.05, 0.25) }}
-                      className="flex flex-col gap-1.5 border-b border-taupe/20 py-4.5"
+                      className="flex min-w-0 items-start gap-4 border-b border-taupe/20 py-4.5 sm:gap-5"
                     >
-                      <div className="flex items-baseline gap-3">
-                        <h3 className="m-0 font-serif text-[22px] font-medium text-ink">
-                          {item.name}
-                        </h3>
-                        <span className="-translate-y-1 flex-1 border-b border-dotted border-taupe/55" />
-                        <span className="text-[15px] text-wine">{item.price}</span>
+                      <div className="size-[76px] shrink-0 overflow-hidden sm:size-[92px]">
+                        <ImageSlot
+                          src={item.image}
+                          label={item.name}
+                          sizes="92px"
+                        />
                       </div>
-                      <p className="m-0 text-[13.5px] font-light leading-[1.7] text-clay">
-                        {item.description}
-                      </p>
-                      {item.tag && (
-                        <span
-                          className={`mt-1 self-start px-2.5 py-1 text-[9px] uppercase tracking-[0.24em] ${
-                            item.featured
-                              ? "bg-gold text-wine"
-                              : "border border-taupe/40 text-taupe"
-                          }`}
-                        >
-                          {item.tag}
-                        </span>
-                      )}
+
+                      <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                        <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
+                          <h3 className="m-0 min-w-0 font-serif text-[19px] font-medium text-balance text-ink sm:text-[22px]">
+                            {item.name}
+                          </h3>
+                          <span className="hidden -translate-y-1 flex-1 border-b border-dotted border-taupe/55 sm:block" />
+                          <span className="ml-auto shrink-0 text-[15px] text-wine sm:ml-0">
+                            {item.price}
+                          </span>
+                        </div>
+                        <p className="m-0 text-[13.5px] font-light leading-[1.7] text-clay text-pretty">
+                          {item.description}
+                        </p>
+                        {item.tag && (
+                          <span
+                            className={`mt-1 self-start px-2.5 py-1 text-[9px] uppercase tracking-[0.24em] ${
+                              item.featured
+                                ? "bg-gold text-wine"
+                                : "border border-taupe/40 text-taupe"
+                            }`}
+                          >
+                            {item.tag}
+                          </span>
+                        )}
+                      </div>
                     </motion.div>
                   ))}
                 </div>

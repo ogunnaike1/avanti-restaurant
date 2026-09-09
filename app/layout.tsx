@@ -20,7 +20,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "AVANTI — Modern Classic Dining, Lagos",
+  title: "AVANTI — Modern Classic Dining, Ibadan",
   description:
     "AVANTI — a modern classic restaurant where timeless flavours meet contemporary elegance. Reserve a table.",
 };

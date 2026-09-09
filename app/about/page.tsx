@@ -8,13 +8,13 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Our Story — AVANTI",
   description:
-    "Seven years on Victoria Island: the room, the kitchen, and the people who keep AVANTI running.",
+    "Seven years in Old Bodija: the room, the kitchen, and the people who keep AVANTI running.",
 };
 
 const chapters = [
   {
     year: "2019",
-    title: "A room on Adeola Odeku",
+    title: "A room on Awolowo Avenue",
     body: "Forty-two seats, one wood grill and a wine list of eleven bottles. The first service ran an hour late and sold out anyway.",
   },
   {
@@ -63,7 +63,7 @@ export default function AboutPage() {
             <em>one standard.</em>
           </h1>
           <p className="m-0 max-w-[52ch] text-base font-light leading-[1.9] text-stone text-pretty">
-            AVANTI began as a small European dining room in Lagos and never tried to be anything
+            AVANTI began as a small European dining room in Ibadan and never tried to be anything
             else. What changed is the confidence &mdash; and the produce.
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function AboutPage() {
               served. The grill is charcoal and wood, lit at ten and rested at midnight.
             </p>
             <p className="m-0 max-w-[54ch] text-[15px] font-light leading-[1.9] text-clay text-pretty">
-              We buy small and often &mdash; fish from Epe, vegetables from Mile 12, cheese from a
+              We buy small and often &mdash; fish from Eleyele, vegetables from Bodija market, cheese from a
               single importer who calls before he lands.
             </p>
           </Reveal>

@@ -27,7 +27,7 @@ export default function HomePage() {
             </h2>
             <p className="m-0 mb-5 max-w-[54ch] text-base font-light leading-[1.9] text-cocoa text-pretty">
               AVANTI is a dining room in the old European sense &mdash; low light, linen, a fire in
-              the kitchen &mdash; rebuilt for the way Lagos eats now. Produce arrives each morning;
+              the kitchen &mdash; rebuilt for the way Ibadan eats now. Produce arrives each morning;
               the menu answers to it.
             </p>
             <p className="m-0 mb-9 max-w-[54ch] text-[15px] font-light leading-[1.9] text-clay text-pretty">

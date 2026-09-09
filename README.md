@@ -71,7 +71,8 @@ placeholder whenever `src` is absent:
 | `intro-dining-room` | Home — "More than a meal" |
 | `dish-risotto`, `dish-ribeye`, `dish-linguine`, `dish-fondant` | Home — signature dish cards (paths live in `lib/menu.ts`) |
 | `experience-table` | Home — full-bleed parallax band |
-| `menu-burrata`, `menu-seabass`, `menu-negroni` | Menu — photo strip |
+| `menu-burrata`, `menu-seabass`, `menu-negroni` | Menu — photo strip, and the matching item rows |
+| `item-*` | Menu — one thumbnail per dish (paths live in `lib/menu.ts`; shown at every breakpoint) |
 | `about-kitchen`, `team-chidera`, `team-marco`, `team-zainab` | About — kitchen and team |
 | `contact-entrance` | Contact — beside the reservation form |
 

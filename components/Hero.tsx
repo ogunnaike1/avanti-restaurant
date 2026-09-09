@@ -11,7 +11,7 @@ const slides = [
     id: "av-hero-1",
     src: "/images/hero-dining-room.jpg",
     label: "The dining room, laid for service",
-    caption: "Est. 2019 · Victoria Island, Lagos",
+    caption: "Est. 2019 · Old Bodija, Ibadan",
   },
   {
     id: "av-hero-2",

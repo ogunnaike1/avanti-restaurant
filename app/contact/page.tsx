@@ -6,11 +6,11 @@ import ReservationForm from "@/components/ReservationForm";
 
 export const metadata: Metadata = {
   title: "Reservations — AVANTI",
-  description: "Reserve a table at AVANTI, Victoria Island, Lagos. Served nightly 12:00 – 23:00.",
+  description: "Reserve a table at AVANTI, Old Bodija, Ibadan. Served nightly 12:00 – 23:00.",
 };
 
 const details = [
-  { label: "Address", lines: ["14 Adeola Odeku Street", "Victoria Island, Lagos"] },
+  { label: "Address", lines: ["14 Awolowo Avenue", "Old Bodija, Ibadan"] },
   { label: "Hours", lines: ["Monday – Sunday", "12:00 – 23:00"] },
   { label: "Telephone", lines: ["+234 801 234 5678"], href: "tel:+2348012345678" },
   { label: "Email", lines: ["reservations@avanti.ng"], href: "mailto:reservations@avanti.ng" },
