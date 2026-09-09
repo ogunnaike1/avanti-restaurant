@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Logo from "./Logo";
 
 const times = ["12:00", "13:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 const sizes = ["1", "2", "3", "4", "5", "6", "7", "8+"];
@@ -31,6 +32,7 @@ export default function ReservationForm() {
             transition={{ duration: 0.5 }}
             className="border border-gold bg-wine px-8 py-12 text-center"
           >
+            <Logo variant="monogram" decorative className="mx-auto mb-6 h-auto w-[86px]" />
             <p className="eyebrow m-0 mb-4 text-gold">Request received</p>
             <h3 className="m-0 mb-4 font-serif text-[32px] font-light text-ivory">
               We will call to confirm.

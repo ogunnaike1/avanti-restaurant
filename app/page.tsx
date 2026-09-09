@@ -46,7 +46,11 @@ export default function HomePage() {
 
           <Reveal direction="right" className="relative">
             <Parallax className="aspect-4/5" strength={26}>
-              <ImageSlot label="Dining room, wide" />
+              <ImageSlot
+                src="/images/intro-dining-room.jpg"
+                label="The dining room, wide"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+              />
             </Parallax>
             <div className="absolute -bottom-[18px] -left-[18px] max-w-[60%] bg-wine px-6 py-5">
               <p className="m-0 font-serif text-[19px] italic leading-[1.4] text-linen">
@@ -85,7 +89,11 @@ export default function HomePage() {
                 <article className="group h-full border border-taupe/20 bg-cream transition-all duration-500 hover:-translate-y-1.5 hover:border-gold hover:shadow-[0_26px_50px_-30px_rgba(63,13,12,.55)]">
                   <div className="aspect-4/5 overflow-hidden">
                     <div className="h-full w-full transition-transform duration-700 group-hover:scale-105">
-                      <ImageSlot label={dish.name} />
+                      <ImageSlot
+                        src={dish.image}
+                        label={dish.name}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                      />
                     </div>
                   </div>
                   <div className="px-6 pb-7 pt-6">
@@ -109,9 +117,15 @@ export default function HomePage() {
 
       <section className="relative flex min-h-[78vh] items-center overflow-hidden bg-wine">
         <Parallax className="absolute inset-0" strength={70}>
-          <ImageSlot label="Table setting, candlelight — full bleed" />
+          <ImageSlot src="/images/experience-table.jpg" label="A table laid with linen and glassware" />
         </Parallax>
-        <div className="pointer-events-none absolute inset-0 bg-[rgba(43,9,8,.62)]" />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg,rgba(20,2,5,.86) 0%,rgba(20,2,5,.6) 48%,rgba(20,2,5,.4) 100%)",
+          }}
+        />
         <Reveal className="relative mx-auto w-full max-w-[1240px] px-[clamp(20px,5vw,64px)] py-[clamp(80px,12vw,150px)]">
           <div className="max-w-[640px]">
             <p className="eyebrow m-0 mb-5 text-gold">The AVANTI experience</p>

@@ -70,8 +70,8 @@ export const menu: MenuGroup[] = [
 ];
 
 export const signatures = [
-  { id: "av-dish-1", kicker: "Chef’s choice", name: "Truffle Risotto", description: "Creamy Arborio rice, aged parmesan, black truffle", price: "₦18,500" },
-  { id: "av-dish-2", kicker: "From the grill", name: "Herb-Crusted Ribeye", description: "Premium beef, roasted roots, house jus", price: "₦32,000" },
-  { id: "av-dish-3", kicker: "Most ordered", name: "Lobster Linguine", description: "Hand-cut pasta, chilli, tomato, lobster butter", price: "₦34,000" },
-  { id: "av-dish-4", kicker: "To finish", name: "Chocolate Fondant", description: "Dark chocolate, vanilla cream, seasonal berries", price: "₦9,500" },
+  { id: "av-dish-1", image: "/images/dish-risotto.jpg", kicker: "Chef’s choice", name: "Truffle Risotto", description: "Creamy Arborio rice, aged parmesan, black truffle", price: "₦18,500" },
+  { id: "av-dish-2", image: "/images/dish-ribeye.jpg", kicker: "From the grill", name: "Herb-Crusted Ribeye", description: "Premium beef, roasted roots, house jus", price: "₦32,000" },
+  { id: "av-dish-3", image: "/images/dish-linguine.jpg", kicker: "Most ordered", name: "Lobster Linguine", description: "Hand-cut pasta, chilli, tomato, lobster butter", price: "₦34,000" },
+  { id: "av-dish-4", image: "/images/dish-fondant.jpg", kicker: "To finish", name: "Chocolate Fondant", description: "Dark chocolate, vanilla cream, seasonal berries", price: "₦9,500" },
 ];

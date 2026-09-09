@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
+import Logo from "@/components/Logo";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 
@@ -29,9 +30,24 @@ const chapters = [
 ];
 
 const team = [
-  { name: "Chidera Okoye", role: "Executive Chef", label: "Chef portrait" },
-  { name: "Marco Vitale", role: "Head of Pastry", label: "Pastry portrait" },
-  { name: "Zainab Bello", role: "Restaurant Director", label: "Director portrait" },
+  {
+    name: "Chidera Okoye",
+    role: "Executive Chef",
+    src: "/images/team-chidera.jpg",
+    label: "Portrait of the executive chef",
+  },
+  {
+    name: "Marco Vitale",
+    role: "Head of Pastry",
+    src: "/images/team-marco.jpg",
+    label: "Portrait of the head of pastry",
+  },
+  {
+    name: "Zainab Bello",
+    role: "Restaurant Director",
+    src: "/images/team-zainab.jpg",
+    label: "Portrait of the restaurant director",
+  },
 ];
 
 export default function AboutPage() {
@@ -39,6 +55,7 @@ export default function AboutPage() {
     <main>
       <section className="bg-wine px-[clamp(20px,5vw,64px)] pb-[clamp(56px,7vw,86px)] pt-[clamp(130px,17vw,190px)]">
         <div className="mx-auto max-w-[1240px]">
+          <Logo variant="monogram" decorative className="mb-6 h-auto w-[92px]" />
           <p className="eyebrow m-0 mb-5 text-gold">Our story</p>
           <h1 className="m-0 mb-6 font-serif text-[clamp(46px,8.4vw,116px)] font-light leading-[0.95] text-ivory">
             Seven years,
@@ -56,7 +73,11 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-[1240px] items-center gap-[clamp(36px,6vw,88px)] lg:grid-cols-2">
           <Reveal direction="left">
             <Parallax className="aspect-4/5" strength={26}>
-              <ImageSlot label="The kitchen at service" />
+              <ImageSlot
+                src="/images/about-kitchen.jpg"
+                label="The kitchen mid-service"
+                sizes="(max-width: 1024px) 100vw, 45vw"
+              />
             </Parallax>
           </Reveal>
           <Reveal>
@@ -118,7 +139,11 @@ export default function AboutPage() {
                 <div className="group">
                   <div className="aspect-4/5 overflow-hidden">
                     <div className="h-full w-full transition-transform duration-700 group-hover:scale-105">
-                      <ImageSlot label={member.label} />
+                      <ImageSlot
+                        src={member.src}
+                        label={member.label}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
                     </div>
                   </div>
                   <h3 className="m-0 mt-5 font-serif text-[24px] font-normal text-wine">

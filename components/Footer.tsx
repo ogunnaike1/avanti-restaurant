@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-wine px-[clamp(20px,5vw,64px)] pb-10 pt-[clamp(64px,9vw,110px)] text-stone">
       <div className="mx-auto grid max-w-[1240px] gap-[clamp(36px,5vw,72px)] md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Logo variant="lockup" className="w-[min(300px,80%)]" />
+          <Logo variant="stacked" className="h-auto w-[min(260px,72%)]" />
           <p className="mt-6 max-w-[38ch] text-[15px] font-light leading-[1.9] text-stone/80">
             A modern classic on Victoria Island — where timeless flavours meet contemporary
             elegance, nightly from noon until eleven.
@@ -34,7 +34,6 @@ export default function Footer() {
             <Link href="/menu" className="text-stone/85 hover:text-gold">The menu</Link>
             <Link href="/about" className="text-stone/85 hover:text-gold">Our story</Link>
             <Link href="/contact" className="text-stone/85 hover:text-gold">Reservations</Link>
-            <Link href="/logo-studio" className="text-stone/85 hover:text-gold">Logo studio</Link>
           </nav>
         </div>
       </div>

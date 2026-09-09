@@ -7,10 +7,30 @@ import ImageSlot from "./ImageSlot";
 import Logo from "./Logo";
 
 const slides = [
-  { id: "av-hero-1", label: "Hero 01 — candlelit dining room", caption: "Est. 2019 · Victoria Island, Lagos" },
-  { id: "av-hero-2", label: "Hero 02 — plated signature dish", caption: "Seasonal · Written each morning" },
-  { id: "av-hero-3", label: "Hero 03 — chef at the pass", caption: "Cooked over fire and butter" },
-  { id: "av-hero-4", label: "Hero 04 — wine and evening atmosphere", caption: "Long evenings · 42 seats nightly" },
+  {
+    id: "av-hero-1",
+    src: "/images/hero-dining-room.jpg",
+    label: "The dining room, laid for service",
+    caption: "Est. 2019 · Victoria Island, Lagos",
+  },
+  {
+    id: "av-hero-2",
+    src: "/images/hero-plated-dish.jpg",
+    label: "A signature plate going to the table",
+    caption: "Seasonal · Written each morning",
+  },
+  {
+    id: "av-hero-3",
+    src: "/images/hero-chef-pass.jpg",
+    label: "The chef finishing a plate at the pass",
+    caption: "Cooked over fire and butter",
+  },
+  {
+    id: "av-hero-4",
+    src: "/images/hero-evening-bar.jpg",
+    label: "The bar in the evening",
+    caption: "Long evenings · 42 seats nightly",
+  },
 ];
 
 const SLIDE_MS = 6500;
@@ -47,12 +67,21 @@ export default function Hero() {
             animate={{ scale: 1.09 }}
             transition={{ duration: SLIDE_MS / 1000 + 2, ease: "linear" }}
           >
-            <ImageSlot label={slide.label} priority={index === 0} />
+            <ImageSlot src={slide.src} label={slide.label} priority={index === 0} sizes="100vw" />
           </motion.div>
         </motion.div>
       </AnimatePresence>
 
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(63,13,12,.62)_0%,rgba(63,13,12,.28)_42%,rgba(36,7,7,.86)_100%)]" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          // Vertical scrim for the nav and the scroll cue, plus a left-hand scrim
+          // so the gold mark and the copy keep their contrast over any photograph.
+          background:
+            "linear-gradient(180deg,rgba(24,3,7,.74) 0%,rgba(24,3,7,.34) 38%,rgba(16,1,4,.92) 100%)," +
+            "linear-gradient(90deg,rgba(20,2,5,.78) 0%,rgba(20,2,5,.34) 46%,rgba(20,2,5,0) 78%)",
+        }}
+      />
 
       <div className="relative mx-auto flex w-full max-w-[1240px] flex-col gap-6 px-[clamp(20px,5vw,64px)] pb-[clamp(56px,9vh,110px)] pt-[clamp(112px,16vh,168px)]">
         <AnimatePresence mode="wait">
@@ -74,7 +103,7 @@ export default function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="m-0"
         >
-          <Logo variant="lockup" className="w-[min(660px,88vw)]" />
+          <Logo variant="stacked" priority className="h-auto w-[min(430px,74vw)]" />
         </motion.h1>
 
         <motion.p

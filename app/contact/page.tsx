@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ImageSlot from "@/components/ImageSlot";
+import Logo from "@/components/Logo";
 import Reveal from "@/components/Reveal";
 import ReservationForm from "@/components/ReservationForm";
 
@@ -20,6 +21,7 @@ export default function ContactPage() {
     <main>
       <section className="bg-wine px-[clamp(20px,5vw,64px)] pb-[clamp(56px,7vw,86px)] pt-[clamp(130px,17vw,190px)]">
         <div className="mx-auto max-w-[1240px]">
+          <Logo variant="monogram" decorative className="mb-6 h-auto w-[92px]" />
           <p className="eyebrow m-0 mb-5 text-gold">Reservations</p>
           <h1 className="m-0 mb-6 font-serif text-[clamp(46px,8.4vw,116px)] font-light leading-[0.95] text-ivory">
             Your table
@@ -41,7 +43,11 @@ export default function ContactPage() {
 
           <Reveal direction="right" className="flex flex-col gap-9">
             <div className="aspect-3/2 overflow-hidden">
-              <ImageSlot label="The entrance on Adeola Odeku" />
+              <ImageSlot
+                src="/images/contact-entrance.jpg"
+                label="The room, seen from the entrance"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
             </div>
             <div className="grid gap-7 sm:grid-cols-2">
               {details.map((detail) => (
