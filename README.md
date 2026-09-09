@@ -20,7 +20,9 @@ npm run build   # production build
 | `app/contact/page.tsx` | Reservations — form plus house details |
 | `lib/menu.ts` | All menu copy and prices — the single source of truth |
 | `components/Logo.tsx` | The mark — stacked signature, wordmark and monogram, all cropped from one artwork |
-| `components/` | `Nav`, `Footer`, `Hero`, `Reveal`, `Parallax`, `ImageSlot`, `MenuBrowser`, `ReservationForm` |
+| `components/` | `Nav`, `Footer`, `Hero`, `Reveal`, `Parallax`, `ImageSlot`, `MenuBrowser` |
+| `components/Reservation*` | `ReservationProvider` (context), `ReserveButton` (trigger), `ReservationModal` (dialog), `ReservationForm` (shared by the dialog and `/contact`) |
+| `app/api/reservations/route.ts` | POST endpoint that validates and records a booking |
 
 ## The mark
 
@@ -93,8 +95,24 @@ These are stock placeholders from Unsplash (free to use, attribution not require
 the wine-and-gold palette. Swap in the restaurant's own photography by replacing the files — keep
 the names and nothing else has to change.
 
-## Not wired up yet
+## Reservations
 
-`ReservationForm` validates and shows a confirmation state client-side; it does not post anywhere.
-Point `handleSubmit` at a route handler (e.g. `app/api/reservations/route.ts`) when the booking
-backend exists.
+Every "Reserve a Table" button is a `<ReserveButton>`, which raises the booking dialog through the
+context in `ReservationProvider` (mounted once in the root layout). The dialog traps Tab, closes on
+Escape or a backdrop click, locks body scroll, and restores focus to whatever opened it. The same
+`ReservationForm` renders inside the dialog and inline on `/contact`.
+
+Submitting POSTs JSON to `/api/reservations`, which validates server-side (name, email shape, phone
+digits, a date that is not in the past, a known sitting and party size), appends the booking to
+`.data/reservations.json`, logs a line, and returns a short reference like `AV-7A83` that the
+confirmation screen shows back to the guest. Field errors come back as `{ errors: { field: msg } }`
+with a 400 and render under the offending inputs.
+
+**To take real bookings**, replace the two file calls in `save()` with a database write and an email
+to the house — the file store assumes one long-running server, so it will not survive a serverless
+deploy. `.data/` is gitignored.
+
+**One rule to keep**: the confirmation screen and the dialog's dismissal must never be gated on a
+Framer Motion `exit` animation. An earlier version wrapped both in `AnimatePresence`, and when those
+exit animations stalled the booking was saved on the server while the form sat there unchanged.
+Both now mount and unmount outright, animating only on entry.

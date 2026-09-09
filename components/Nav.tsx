@@ -40,8 +40,8 @@ export default function Nav() {
         aria-label="Primary"
         animate={{
           backgroundColor: scrolled ? "rgba(56,1,9,0.92)" : "rgba(56,1,9,0)",
-          paddingTop: scrolled ? 14 : 24,
-          paddingBottom: scrolled ? 14 : 24,
+          paddingTop: scrolled ? 10 : 16,
+          paddingBottom: scrolled ? 10 : 16,
           borderColor: scrolled ? "rgba(142,111,87,0.28)" : "rgba(218,176,97,0)",
         }}
         transition={{ duration: 0.45, ease: "easeOut" }}
@@ -49,9 +49,11 @@ export default function Nav() {
       >
         <Link href="/" aria-label="AVANTI home" className="block">
           <Logo
-            variant="wordmark"
+            variant="stacked"
             priority
-            className="h-[26px] w-auto transition-all duration-500 sm:h-[32px]"
+            className={`w-auto transition-all duration-500 ${
+              scrolled ? "h-[54px] sm:h-[62px]" : "h-[68px] sm:h-[82px]"
+            }`}
           />
         </Link>
 
