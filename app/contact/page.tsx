@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ImageSlot from "@/components/ImageSlot";
 import Logo from "@/components/Logo";
 import Reveal from "@/components/Reveal";
+import { whatsappHref, whatsappNumber } from "@/components/WhatsAppButton";
 import ReservationForm from "@/components/ReservationForm";
 
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ const details = [
   { label: "Address", lines: ["14 Awolowo Avenue", "Old Bodija, Ibadan"] },
   { label: "Hours", lines: ["Monday – Sunday", "12:00 – 23:00"] },
   { label: "Telephone", lines: ["+234 801 234 5678"], href: "tel:+2348012345678" },
+  { label: "WhatsApp", lines: [whatsappNumber], href: whatsappHref, external: true },
   { label: "Email", lines: ["reservations@avanti.ng"], href: "mailto:reservations@avanti.ng" },
 ];
 
@@ -58,6 +60,8 @@ export default function ContactPage() {
                       <a
                         key={line}
                         href={detail.href}
+                        target={detail.external ? "_blank" : undefined}
+                        rel={detail.external ? "noopener noreferrer" : undefined}
                         className="block text-[15px] font-light leading-[1.8] text-wine hover:text-gold"
                       >
                         {line}

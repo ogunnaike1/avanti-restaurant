@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReservationProvider from "@/components/ReservationProvider";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
           {children}
           <Footer />
+          <WhatsAppButton />
         </ReservationProvider>
       </body>
     </html>

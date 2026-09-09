@@ -59,6 +59,14 @@ wrapped the sections in `AnimatePresence` and filtered-out rows never left the D
 reported "0 results" while still showing all 24 dishes. Sections and items now unmount outright and
 animate only on mount.
 
+## WhatsApp
+
+`WhatsAppButton` is mounted once in the root layout and floats bottom-right on every page at
+`z-[55]` — under the booking dialog (`z-[80]`), so it never covers the form. It links to
+`wa.me/2348131561562` with a prefilled message, which opens the app on a phone and WhatsApp Web on
+a desktop. The number and href are exported from that file and reused by the footer and the contact
+page, so there is one place to change it.
+
 ## Design tokens
 
 Colours and fonts live in the `@theme` block of `app/globals.css`, so `bg-wine`, `text-gold`,

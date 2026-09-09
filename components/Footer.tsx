@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import { whatsappHref, whatsappNumber } from "./WhatsAppButton";
 
 export default function Footer() {
   return (
@@ -22,6 +23,14 @@ export default function Footer() {
           </p>
           <a href="tel:+2348012345678" className="mt-4 block text-[15px] text-gold">
             +234 801 234 5678
+          </a>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-[15px] text-gold"
+          >
+            WhatsApp {whatsappNumber}
           </a>
           <a href="mailto:reservations@avanti.ng" className="block text-[15px] text-gold">
             reservations@avanti.ng
