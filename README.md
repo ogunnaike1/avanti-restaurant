@@ -15,7 +15,7 @@ npm run build   # production build
 | Path | What it is |
 | --- | --- |
 | `app/page.tsx` | Home — hero slideshow, house intro, signature dishes, parallax feature, reservation CTA |
-| `app/menu/page.tsx` | Menu — hero, photo strip, and the filterable `MenuBrowser` |
+| `app/menu/page.tsx` | Menu — hero, photo strip, and `MenuBrowser` (search + section filters) |
 | `app/about/page.tsx` | Our story — kitchen, milestones, team |
 | `app/contact/page.tsx` | Reservations — form plus house details |
 | `lib/menu.ts` | All menu copy and prices — the single source of truth |
@@ -43,6 +43,19 @@ why the header turns wine rather than cream on scroll.
 
 To regenerate the files from new artwork, adapt `scripts/prep-logo.js` (crop, pad, feather) and
 re-run it (`node scripts/prep-logo.js <artwork>`); it also writes `app/icon.png`, the favicon.
+
+## Menu search
+
+`MenuBrowser` filters the menu client-side as you type — there is no index or API behind it, the
+whole menu is 24 items in `lib/menu.ts`. It matches names, descriptions, dietary tags and section
+titles, folding case and accents (`veloute` finds *Velouté*, `creme` finds *Crème*), and marks the
+matched run in gold. The search and the section chips combine; when a search has matches only
+outside the chosen section, the empty state offers to widen to the whole menu.
+
+One constraint worth keeping: **the list must not depend on exit animations.** An earlier version
+wrapped the sections in `AnimatePresence` and filtered-out rows never left the DOM — the page
+reported "0 results" while still showing all 24 dishes. Sections and items now unmount outright and
+animate only on mount.
 
 ## Design tokens
 

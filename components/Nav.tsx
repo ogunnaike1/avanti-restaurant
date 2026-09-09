@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Logo from "./Logo";
+import ReserveButton from "./ReserveButton";
 
 const links = [
   { href: "/", label: "Home" },
@@ -66,12 +67,9 @@ export default function Nav() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="border border-gold bg-gold px-6 py-3 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-wine transition-all duration-300 hover:bg-transparent hover:tracking-[0.26em] hover:text-gold"
-          >
+          <ReserveButton className="border border-gold bg-gold px-6 py-3 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-wine transition-all duration-300 hover:bg-transparent hover:tracking-[0.26em] hover:text-gold">
             Reserve a Table
-          </Link>
+          </ReserveButton>
         </div>
 
         <button
@@ -113,12 +111,12 @@ export default function Nav() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
+            <ReserveButton
+              onClick={() => setOpen(false)}
               className="mt-5 border border-gold bg-gold px-6 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-wine"
             >
               Reserve a Table
-            </Link>
+            </ReserveButton>
           </motion.div>
         )}
       </AnimatePresence>

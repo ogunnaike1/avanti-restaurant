@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ReservationProvider from "@/components/ReservationProvider";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -29,9 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${cormorant.variable} ${manrope.variable}`}>
       <body className="overflow-x-hidden font-sans">
-        <Nav />
-        {children}
-        <Footer />
+        <ReservationProvider>
+          <Nav />
+          {children}
+          <Footer />
+        </ReservationProvider>
       </body>
     </html>
   );

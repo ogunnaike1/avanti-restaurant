@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ImageSlot from "@/components/ImageSlot";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
+import ReserveButton from "@/components/ReserveButton";
 import { signatures } from "@/lib/menu";
 
 const stats = [
@@ -184,12 +185,9 @@ export default function HomePage() {
               the tasting room, call the house directly.
             </p>
             <div className="flex flex-wrap gap-3.5">
-              <Link
-                href="/contact"
-                className="border border-wine bg-wine px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-linen transition-colors duration-400 hover:border-gold hover:bg-gold hover:text-wine"
-              >
+              <ReserveButton className="border border-wine bg-wine px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-linen transition-colors duration-400 hover:border-gold hover:bg-gold hover:text-wine">
                 Reserve a Table
-              </Link>
+              </ReserveButton>
               <a
                 href="tel:+2348012345678"
                 className="inline-flex items-center border border-wine/35 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-wine transition-colors duration-400 hover:border-wine"

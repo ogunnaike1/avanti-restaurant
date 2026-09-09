@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ImageSlot from "./ImageSlot";
 import Logo from "./Logo";
+import ReserveButton from "./ReserveButton";
 
 const slides = [
   {
@@ -137,12 +138,9 @@ export default function Hero() {
           >
             Explore Our Menu
           </Link>
-          <Link
-            href="/contact"
-            className="border border-cream/45 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-cream transition-all duration-400 hover:border-cream hover:bg-cream hover:text-wine"
-          >
+          <ReserveButton className="border border-cream/45 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-cream transition-all duration-400 hover:border-cream hover:bg-cream hover:text-wine">
             Reserve a Table
-          </Link>
+          </ReserveButton>
         </motion.div>
 
         <div className="mt-3.5 flex items-center gap-3.5">

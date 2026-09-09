@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
 import Logo from "@/components/Logo";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
+import ReserveButton from "@/components/ReserveButton";
 
 export const metadata: Metadata = {
   title: "Our Story — AVANTI",
@@ -164,12 +164,9 @@ export default function AboutPage() {
           <h2 className="m-0 mb-6 font-serif text-[clamp(34px,5.4vw,72px)] font-light leading-none text-wine">
             Come and see <em>for yourself.</em>
           </h2>
-          <Link
-            href="/contact"
-            className="inline-block border border-wine bg-wine px-10 py-[19px] text-[11px] font-semibold uppercase tracking-[0.22em] text-linen transition-all duration-400 hover:border-gold hover:bg-gold hover:tracking-[0.3em] hover:text-wine"
-          >
+          <ReserveButton className="inline-block border border-wine bg-wine px-10 py-[19px] text-[11px] font-semibold uppercase tracking-[0.22em] text-linen transition-all duration-400 hover:border-gold hover:bg-gold hover:tracking-[0.3em] hover:text-wine">
             Reserve a Table
-          </Link>
+          </ReserveButton>
         </Reveal>
       </section>
     </main>
