@@ -95,6 +95,25 @@ These are stock placeholders from Unsplash (free to use, attribution not require
 the wine-and-gold palette. Swap in the restaurant's own photography by replacing the files — keep
 the names and nothing else has to change.
 
+### Weight
+
+After adding artwork, run the optimizer — it caps each file at the largest size its slot can use
+(CSS size x 2 for retina) and re-encodes with mozjpeg / a quantised palette:
+
+```bash
+npm run optimize:images          # rewrite in place
+node scripts/optimize-images.js --dry   # report only
+```
+
+It took `public/` from 8.9 MB to 2.2 MB (-75%) with no visible difference. Two caveats: it rewrites
+files in place, so re-running it repeatedly on the same JPEGs slowly costs quality — run it on new
+files. And **stop the dev server first**; on Windows a running server holds the files open and the
+rewrite fails with `UNKNOWN`.
+
+On top of that, `next.config.mjs` serves AVIF first (WebP fallback), so the browser downloads far
+less than sits on disk: the 1920px hero is 100 KB as AVIF against 251 KB as JPEG, and a menu
+thumbnail is about 6 KB.
+
 ## Reservations
 
 Every "Reserve a Table" button is a `<ReserveButton>`, which raises the booking dialog through the
