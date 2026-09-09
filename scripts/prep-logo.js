@@ -159,6 +159,10 @@ async function build(src, out, { crop, pad = 0.07, feather = 0.13, width } = {})
       create: { width: size, height: size, channels: 4, background: "#380109" },
     })
       .composite([{ input: mark, gravity: "centre" }])
+      // Flatten: iOS composites a home-screen icon onto black, and some older
+      // versions mishandle RGBA PNGs, so ship a plain opaque tile.
+      .flatten({ background: "#380109" })
+      .removeAlpha()
       .png({ compressionLevel: 9 })
       .toFile(out);
     console.log(`${path.relative(ROOT, out)} ${size}x${size}`);

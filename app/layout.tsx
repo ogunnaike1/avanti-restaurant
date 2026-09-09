@@ -33,6 +33,10 @@ export const metadata: Metadata = {
     title: "AVANTI",
     statusBarStyle: "black-translucent",
   },
+  other: {
+    // Next emits the modern `mobile-web-app-capable`; iOS before 16.4 needs this.
+    "apple-mobile-web-app-capable": "yes",
+  },
 };
 
 export const viewport: Viewport = {

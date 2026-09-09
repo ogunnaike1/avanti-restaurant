@@ -59,6 +59,23 @@ wrapped the sections in `AnimatePresence` and filtered-out rows never left the D
 reported "0 results" while still showing all 24 dishes. Sections and items now unmount outright and
 animate only on mount.
 
+## App icons
+
+`scripts/prep-logo.js` also cuts the app icons from the same artwork:
+
+| File | Used by |
+| --- | --- |
+| `app/apple-icon.png` (180px) | iOS "Add to Home Screen" — Next links it as `apple-touch-icon` |
+| `app/icon.png` (256px) | Browser tab |
+| `public/icon-192.png`, `icon-512.png` | `app/manifest.ts` — Android / desktop install |
+| `public/icon-maskable-512.png` | Android maskable icon — the mark is kept inside the safe circle |
+
+They are deliberately **opaque wine tiles, full-bleed, with no alpha channel**: iOS composites a
+home-screen icon onto black, so a transparent PNG would show the mark floating on a black square,
+and it rounds the corners itself. The shortcut is named by `appleWebApp.title` in `app/layout.tsx`
+("AVANTI"), and `apple-mobile-web-app-capable` is emitted alongside Next's modern
+`mobile-web-app-capable` for iOS before 16.4.
+
 ## WhatsApp
 
 `WhatsAppButton` is mounted once in the root layout and floats bottom-right on every page at
