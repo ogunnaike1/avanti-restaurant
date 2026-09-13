@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
-import { sendReservationEmail } from "@/lib/mail";
 import { saveReservation, type Reservation } from "@/lib/reservations";
+import { reservationLink } from "@/lib/whatsapp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -69,30 +69,23 @@ export async function POST(request: Request) {
     createdAt: new Date().toISOString(),
   };
 
+  /*
+   * The guest's own WhatsApp client delivers the booking, so this write is only
+   * a local convenience copy. It must never block the request: on a read-only
+   * or ephemeral filesystem (Vercel and every other serverless host) it always
+   * fails, and failing the request there would refuse every booking.
+   */
   try {
     await saveReservation(reservation);
   } catch (error) {
-    console.error("[reservations] could not save booking", error);
-    return NextResponse.json(
-      { error: "We could not record that booking. Please call the house." },
-      { status: 500 },
-    );
-  }
-
-  // The booking is safe on disk at this point; a mail failure must not lose it
-  // or tell the guest to book again, so it is logged rather than surfaced.
-  let emailed = false;
-  try {
-    emailed = await sendReservationEmail(reservation);
-  } catch (error) {
-    console.error(
-      `[reservations] ${reservation.reference} could not be emailed`,
+    console.warn(
+      `[reservations] ${reservation.reference} not written to disk`,
       error,
     );
   }
 
   console.log(
-    `[reservations] ${reservation.reference} · ${reservation.name} · ${reservation.date} ${reservation.time} · ${reservation.guests} · ${emailed ? "emailed" : "not emailed"}`,
+    `[reservations] ${reservation.reference} · ${reservation.name} · ${reservation.date} ${reservation.time} · ${reservation.guests}`,
   );
 
   return NextResponse.json(
@@ -100,6 +93,8 @@ export async function POST(request: Request) {
       reference: reservation.reference,
       date: reservation.date,
       time: reservation.time,
+      // Built here so the message format has exactly one definition.
+      whatsappUrl: reservationLink(reservation),
     },
     { status: 201 },
   );

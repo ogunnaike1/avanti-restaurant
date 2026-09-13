@@ -1,9 +1,12 @@
-const NUMBER = "2348131561562";
-const MESSAGE = "Hello AVANTI — I would like to book a table.";
+import {
+  WHATSAPP_DISPLAY,
+  WHATSAPP_GREETING,
+  whatsappLink,
+} from "@/lib/whatsapp";
 
-/** wa.me opens the app on a phone and WhatsApp Web on a desktop. */
-export const whatsappHref = `https://wa.me/${NUMBER}?text=${encodeURIComponent(MESSAGE)}`;
-export const whatsappNumber = "+234 813 156 1562";
+// Re-exported so the footer and contact page keep their existing imports.
+export const whatsappHref = whatsappLink(WHATSAPP_GREETING);
+export const whatsappNumber = WHATSAPP_DISPLAY;
 
 /**
  * Floating chat affordance. Sits under the booking dialog (z-[80]) so it never

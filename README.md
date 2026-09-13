@@ -147,45 +147,33 @@ Escape or a backdrop click, locks body scroll, and restores focus to whatever op
 `ReservationForm` renders inside the dialog and inline on `/contact`.
 
 Submitting POSTs JSON to `/api/reservations`, which validates server-side (name, email shape, phone
-digits, a date that is not in the past, a known sitting and party size), then does two things:
+digits, a date that is not in the past, a known sitting and party size), then returns a short
+reference like `AV-7A83` together with a ready-to-send WhatsApp link. Field errors come back as
+`{ errors: { field: msg } }` with a 400 and render under the inputs.
 
-1. **Writes the booking to `.data/reservations.json`** (`lib/reservations.ts`) — the record of last
-   resort, so a mail outage can never lose a table.
-2. **Emails the house** (`lib/mail.ts`) at `RESERVATIONS_EMAIL`, with `Reply-To` set to the guest so
-   staff can just hit reply. Subject line carries the name, date, time and party size.
+### How a booking reaches the house
 
-It returns a short reference like `AV-7A83` that the confirmation screen quotes back to the guest.
-Field errors come back as `{ errors: { field: msg } }` with a 400 and render under the inputs.
+Bookings go to **WhatsApp, not email**. The route builds the message with `reservationLink()`
+(`lib/whatsapp.ts`) and the form hands it to the guest's own WhatsApp client — `window.open` on the
+`wa.me` link, with the same link repeated as a **Send on WhatsApp** button on the confirmation
+screen in case a pop-up blocker swallows the automatic hand-off.
 
-### Turning email on
+That means there are no credentials, no mail server and no API keys to keep alive. It also means
+**the booking only arrives when the guest presses send in WhatsApp.** The confirmation screen says
+so plainly ("the table is not held until you do"), because nothing else records the booking off-box.
 
-Copy `.env.example` to `.env.local` and fill in the mailbox's SMTP details:
+The house number is defined once, as `WHATSAPP_NUMBER` in `lib/whatsapp.ts`. The float button,
+footer, contact page and booking form all read it from there, so changing it in that one place
+updates every surface.
 
-```bash
-RESERVATIONS_EMAIL=reservations@avanti.ng   # where bookings land
-SMTP_HOST=smtp.zoho.com
-SMTP_PORT=587
-SMTP_USER=reservations@avanti.ng
-SMTP_PASS=your-app-password
-```
-
-Any host works — Google Workspace, Zoho, cPanel. Gmail/Workspace needs an **app password**, not the
-account password. `SMTP_FROM` usually has to be an address the account may send as, so leave it
-unset unless your host complains.
-
-Behaviour is deliberately forgiving, and all three paths are tested:
-
-| Situation | What happens |
-| --- | --- |
-| SMTP set and reachable | Booking stored **and** emailed; log ends `· emailed` |
-| SMTP set but the server is down | Booking stored, guest still gets a confirmation, error logged, log ends `· not emailed` |
-| No SMTP configured | Booking stored, warning logged telling you which vars to set |
-
-A booking is never rejected because mail failed — the guest would just book twice. Watch the logs
-for `not emailed` and keep `.data/reservations.json` as the backstop. `.data/` is gitignored.
+`lib/reservations.ts` still appends each booking to `.data/reservations.json` as a local
+convenience copy. That write is best-effort and never blocks a booking: serverless hosts (Vercel
+included) have an ephemeral, largely read-only filesystem, so it simply logs a warning and carries
+on. Do not treat it as a record of bookings in production. `.data/` is gitignored.
 
 **On a serverless host** the file store will not persist; swap `saveReservation()` for a database
-write. The email path works anywhere with outbound SMTP.
+write if you need bookings recorded server-side. The WhatsApp hand-off itself works anywhere — it
+is a link, not a network call from the server.
 
 **One rule to keep**: the confirmation screen and the dialog's dismissal must never be gated on a
 Framer Motion `exit` animation. An earlier version wrapped both in `AnimatePresence`, and when those
