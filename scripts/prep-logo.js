@@ -10,7 +10,7 @@
  * animated (stacking-context-creating) parents the mark sits in, and the art drops
  * onto photographs and flat wine alike with no visible tile.
  */
-const GROUND = [56, 6, 12];
+const GROUND = [70, 6, 12];
 const sharp = require("sharp");
 const path = require("path");
 
@@ -120,7 +120,7 @@ async function build(src, out, { crop, pad = 0.07, feather = 0.13, width } = {})
 (async () => {
   // One source of truth: every lockup is cropped from the same artwork, so the
   // wordmark in the header is the same drawing as the mark in the hero.
-  const src = artwork ?? "c:/Users/usman/Downloads/logo1.jpeg";
+  const src = artwork ?? path.join(ROOT, "assets", "avanti-logo.jpeg");
 
   // Full stacked signature: monogram over wordmark.
   await build(src, "avanti-stacked.png", { width: 1000, pad: 0.12, feather: 0.14 });
@@ -128,7 +128,7 @@ async function build(src, out, { crop, pad = 0.07, feather = 0.13, width } = {})
   // Just the AVANTI line, for the header — at that height the descriptor of the
   // full lockup would be an illegible smudge.
   await build(src, "avanti-wordmark.png", {
-    crop: { left: 120, top: 615, width: 1020, height: 215 },
+    crop: { left: 120, top: 600, width: 1040, height: 200 },
     width: 1000,
     pad: 0.05,
     feather: 0.08,
@@ -136,7 +136,7 @@ async function build(src, out, { crop, pad = 0.07, feather = 0.13, width } = {})
 
   // The swash A alone.
   await build(src, "avanti-monogram.png", {
-    crop: { left: 380, top: 190, width: 540, height: 450 },
+    crop: { left: 420, top: 230, width: 500, height: 380 },
     width: 512,
     pad: 0.14,
     feather: 0.16,

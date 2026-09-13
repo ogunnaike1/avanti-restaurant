@@ -14,19 +14,19 @@ const art = {
   stacked: {
     src: "/avanti-stacked.png",
     width: 1000,
-    height: 796,
-    alt: "AVANTI — Fine Dining Restaurant",
+    height: 696,
+    alt: "AVANTI — Cafe, Restaurant",
   },
   wordmark: {
     src: "/avanti-wordmark.png",
-    width: 995,
-    height: 171,
+    width: 1000,
+    height: 162,
     alt: "AVANTI",
   },
   monogram: {
     src: "/avanti-monogram.png",
     width: 512,
-    height: 412,
+    height: 400,
     alt: "AVANTI",
   },
 } as const;

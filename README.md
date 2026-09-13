@@ -147,14 +147,45 @@ Escape or a backdrop click, locks body scroll, and restores focus to whatever op
 `ReservationForm` renders inside the dialog and inline on `/contact`.
 
 Submitting POSTs JSON to `/api/reservations`, which validates server-side (name, email shape, phone
-digits, a date that is not in the past, a known sitting and party size), appends the booking to
-`.data/reservations.json`, logs a line, and returns a short reference like `AV-7A83` that the
-confirmation screen shows back to the guest. Field errors come back as `{ errors: { field: msg } }`
-with a 400 and render under the offending inputs.
+digits, a date that is not in the past, a known sitting and party size), then does two things:
 
-**To take real bookings**, replace the two file calls in `save()` with a database write and an email
-to the house — the file store assumes one long-running server, so it will not survive a serverless
-deploy. `.data/` is gitignored.
+1. **Writes the booking to `.data/reservations.json`** (`lib/reservations.ts`) — the record of last
+   resort, so a mail outage can never lose a table.
+2. **Emails the house** (`lib/mail.ts`) at `RESERVATIONS_EMAIL`, with `Reply-To` set to the guest so
+   staff can just hit reply. Subject line carries the name, date, time and party size.
+
+It returns a short reference like `AV-7A83` that the confirmation screen quotes back to the guest.
+Field errors come back as `{ errors: { field: msg } }` with a 400 and render under the inputs.
+
+### Turning email on
+
+Copy `.env.example` to `.env.local` and fill in the mailbox's SMTP details:
+
+```bash
+RESERVATIONS_EMAIL=reservations@avanti.ng   # where bookings land
+SMTP_HOST=smtp.zoho.com
+SMTP_PORT=587
+SMTP_USER=reservations@avanti.ng
+SMTP_PASS=your-app-password
+```
+
+Any host works — Google Workspace, Zoho, cPanel. Gmail/Workspace needs an **app password**, not the
+account password. `SMTP_FROM` usually has to be an address the account may send as, so leave it
+unset unless your host complains.
+
+Behaviour is deliberately forgiving, and all three paths are tested:
+
+| Situation | What happens |
+| --- | --- |
+| SMTP set and reachable | Booking stored **and** emailed; log ends `· emailed` |
+| SMTP set but the server is down | Booking stored, guest still gets a confirmation, error logged, log ends `· not emailed` |
+| No SMTP configured | Booking stored, warning logged telling you which vars to set |
+
+A booking is never rejected because mail failed — the guest would just book twice. Watch the logs
+for `not emailed` and keep `.data/reservations.json` as the backstop. `.data/` is gitignored.
+
+**On a serverless host** the file store will not persist; swap `saveReservation()` for a database
+write. The email path works anywhere with outbound SMTP.
 
 **One rule to keep**: the confirmation screen and the dialog's dismissal must never be gated on a
 Framer Motion `exit` animation. An earlier version wrapped both in `AnimatePresence`, and when those

@@ -1,34 +1,13 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { NextResponse } from "next/server";
+import { sendReservationEmail } from "@/lib/mail";
+import { saveReservation, type Reservation } from "@/lib/reservations";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/*
- * Bookings are appended to .data/reservations.json on the server's disk. That is
- * enough for a single long-running host; on a serverless platform, swap the two
- * file calls in `save()` for a database write and an email to the house.
- */
-const STORE_DIR = path.join(process.cwd(), ".data");
-const STORE_FILE = path.join(STORE_DIR, "reservations.json");
-
 const TIMES = ["12:00", "13:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 const PARTY_SIZES = ["1", "2", "3", "4", "5", "6", "7", "8+"];
-
-export type Reservation = {
-  id: string;
-  reference: string;
-  name: string;
-  email: string;
-  phone: string;
-  date: string;
-  time: string;
-  guests: string;
-  notes: string;
-  createdAt: string;
-};
 
 const asString = (value: unknown) =>
   typeof value === "string" ? value.trim() : "";
@@ -66,21 +45,6 @@ function validate(body: Record<string, unknown>) {
   return { errors, values: { name, email, phone, date, time, guests, notes } };
 }
 
-async function save(reservation: Reservation) {
-  await mkdir(STORE_DIR, { recursive: true });
-
-  let existing: Reservation[] = [];
-  try {
-    existing = JSON.parse(await readFile(STORE_FILE, "utf8")) as Reservation[];
-    if (!Array.isArray(existing)) existing = [];
-  } catch {
-    // No store yet, or it was unreadable — start a fresh one.
-  }
-
-  existing.push(reservation);
-  await writeFile(STORE_FILE, JSON.stringify(existing, null, 2), "utf8");
-}
-
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try {
@@ -106,7 +70,7 @@ export async function POST(request: Request) {
   };
 
   try {
-    await save(reservation);
+    await saveReservation(reservation);
   } catch (error) {
     console.error("[reservations] could not save booking", error);
     return NextResponse.json(
@@ -115,8 +79,20 @@ export async function POST(request: Request) {
     );
   }
 
+  // The booking is safe on disk at this point; a mail failure must not lose it
+  // or tell the guest to book again, so it is logged rather than surfaced.
+  let emailed = false;
+  try {
+    emailed = await sendReservationEmail(reservation);
+  } catch (error) {
+    console.error(
+      `[reservations] ${reservation.reference} could not be emailed`,
+      error,
+    );
+  }
+
   console.log(
-    `[reservations] ${reservation.reference} · ${reservation.name} · ${reservation.date} ${reservation.time} · ${reservation.guests}`,
+    `[reservations] ${reservation.reference} · ${reservation.name} · ${reservation.date} ${reservation.time} · ${reservation.guests} · ${emailed ? "emailed" : "not emailed"}`,
   );
 
   return NextResponse.json(
