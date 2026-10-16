@@ -18,7 +18,7 @@ npm run build   # production build
 | `app/menu/page.tsx` | Menu — hero, photo strip, and `MenuBrowser` (search + section filters) |
 | `app/about/page.tsx` | Our story — kitchen, milestones, team |
 | `app/contact/page.tsx` | Reservations — form plus house details |
-| `lib/menu.ts` | All menu copy and prices — the single source of truth |
+| `lib/menu.ts` | All menu copy (prices optional) — the single source of truth |
 | `components/Logo.tsx` | The mark — stacked signature, wordmark and monogram, all cropped from one artwork |
 | `components/` | `Nav`, `Footer`, `Hero`, `Reveal`, `Parallax`, `ImageSlot`, `MenuBrowser` |
 | `components/Reservation*` | `ReservationProvider` (context), `ReserveButton` (trigger), `ReservationModal` (dialog), `ReservationForm` (shared by the dialog and `/contact`) |
@@ -49,8 +49,8 @@ re-run it (`node scripts/prep-logo.js <artwork>`); it also writes `app/icon.png`
 ## Menu search
 
 `MenuBrowser` filters the menu client-side as you type — there is no index or API behind it, the
-whole menu is 24 items in `lib/menu.ts`. It matches names, descriptions, dietary tags and section
-titles, folding case and accents (`veloute` finds *Velouté*, `creme` finds *Crème*), and marks the
+whole menu is 36 drinks in `lib/menu.ts`. It matches names, ingredients, tags and section
+titles, folding case and accents (`pina` finds *Piña*, `curacao` finds *curaçao*), and marks the
 matched run in gold. The search and the section chips combine; when a search has matches only
 outside the chosen section, the empty state offers to widen to the whole menu.
 

@@ -119,7 +119,7 @@ export default function MenuBrowser() {
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search dishes, drinks, ingredients"
+              placeholder="Search drinks and ingredients"
               aria-label="Search the menu"
               className="w-full border border-taupe/40 bg-transparent py-2.5 pl-9 pr-9 text-[13px] font-light text-ink outline-none transition-colors duration-300 placeholder:text-taupe/80 focus:border-gold"
             />
@@ -145,7 +145,7 @@ export default function MenuBrowser() {
           >
             {term
               ? `${count} ${count === 1 ? "result" : "results"} for “${query.trim()}”`
-              : `${count} dishes`}
+              : `${count} ${count === 1 ? "drink" : "drinks"}`}
           </p>
 
           {count === 0 && (
@@ -156,7 +156,7 @@ export default function MenuBrowser() {
               <p className="m-0 mt-3 text-[14px] font-light leading-[1.8] text-clay">
                 {matchesElsewhere
                   ? "There are matches in other sections of the menu."
-                  : "Try a dish, an ingredient, or a note like “vegetarian”."}
+                  : "Try a drink or an ingredient, like “mint” or “rum”."}
               </p>
               <button
                 onClick={() => {
@@ -201,23 +201,29 @@ export default function MenuBrowser() {
                     }}
                     className="flex min-w-0 items-start gap-4 border-b border-taupe/20 py-4.5 sm:gap-5"
                   >
-                    <div className="size-[76px] shrink-0 overflow-hidden sm:size-[92px]">
-                      <ImageSlot
-                        src={item.image}
-                        label={item.name}
-                        sizes="92px"
-                      />
-                    </div>
+                    {item.image && (
+                      <div className="size-[76px] shrink-0 overflow-hidden sm:size-[92px]">
+                        <ImageSlot
+                          src={item.image}
+                          label={item.name}
+                          sizes="92px"
+                        />
+                      </div>
+                    )}
 
                     <div className="flex min-w-0 flex-1 flex-col gap-1.5">
                       <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
                         <h3 className="m-0 min-w-0 font-serif text-[19px] font-medium text-balance text-ink sm:text-[22px]">
                           <Highlight text={item.name} query={query} />
                         </h3>
-                        <span className="hidden -translate-y-1 flex-1 border-b border-dotted border-taupe/55 sm:block" />
-                        <span className="ml-auto shrink-0 text-[15px] text-wine sm:ml-0">
-                          {item.price}
-                        </span>
+                        {item.price && (
+                          <>
+                            <span className="hidden -translate-y-1 flex-1 border-b border-dotted border-taupe/55 sm:block" />
+                            <span className="ml-auto shrink-0 text-[15px] text-wine sm:ml-0">
+                              {item.price}
+                            </span>
+                          </>
+                        )}
                       </div>
                       <p className="m-0 text-[13.5px] font-light leading-[1.7] text-clay text-pretty">
                         <Highlight text={item.description} query={query} />

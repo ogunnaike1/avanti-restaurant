@@ -69,9 +69,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1240px]">
           <Reveal className="mb-[clamp(40px,6vw,72px)] flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="eyebrow m-0 mb-4 text-taupe">Signature dishes</p>
+              <p className="eyebrow m-0 mb-4 text-taupe">Signature drinks</p>
               <h2 className="m-0 font-serif text-[clamp(34px,4.8vw,64px)] font-light leading-[1.05] text-wine">
-                Four plates that
+                Four pours that
                 <br />
                 <em>define the house.</em>
               </h2>
@@ -104,10 +104,9 @@ export default function HomePage() {
                     <h3 className="m-0 mb-2.5 font-serif text-[27px] font-normal text-wine">
                       {dish.name}
                     </h3>
-                    <p className="m-0 mb-4 text-[13.5px] font-light leading-[1.75] text-clay">
+                    <p className="m-0 text-[13.5px] font-light leading-[1.75] text-clay">
                       {dish.description}
                     </p>
-                    <p className="m-0 text-[15px] tracking-[0.04em] text-taupe">{dish.price}</p>
                   </div>
                 </article>
               </Reveal>
