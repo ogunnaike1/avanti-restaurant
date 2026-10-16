@@ -113,7 +113,7 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="m-0 max-w-[16ch] font-serif text-[clamp(24px,3.4vw,44px)] font-light italic leading-[1.15] text-linen"
         >
-          An unforgettable table awaits.
+          An uforgettable table awaits.
         </motion.p>
 
         <motion.p
