@@ -49,7 +49,7 @@ re-run it (`node scripts/prep-logo.js <artwork>`); it also writes `app/icon.png`
 ## Menu search
 
 `MenuBrowser` filters the menu client-side as you type — there is no index or API behind it, the
-whole menu is 36 drinks in `lib/menu.ts`. It matches names, ingredients, tags and section
+whole menu is 34 source records (33 shown) in `lib/menu.ts`. It matches names, ingredients, tags and section
 titles, folding case and accents (`pina` finds *Piña*, `curacao` finds *curaçao*), and marks the
 matched run in gold. The search and the section chips combine; when a search has matches only
 outside the chosen section, the empty state offers to widen to the whole menu.

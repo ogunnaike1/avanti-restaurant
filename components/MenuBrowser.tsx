@@ -6,8 +6,8 @@ import ImageSlot from "./ImageSlot";
 import { menu, type MenuGroup } from "@/lib/menu";
 
 const filters = [
-  { id: "all", label: "All" },
-  ...menu.map((group) => ({ id: group.id, label: group.title.split(" ")[0] })),
+  { id: "all", label: "All Items" },
+  ...menu.map((group) => ({ id: group.id, label: group.title })),
 ] as const;
 
 type FilterId = (typeof filters)[number]["id"];
@@ -46,9 +46,9 @@ function Highlight({ text, query }: { text: string; query: string }) {
 }
 
 const haystack = (
-  item: { name: string; description: string; tag?: string },
+  item: { name: string; description?: string; tag?: string },
   section: string,
-) => fold(`${item.name} ${item.description} ${item.tag ?? ""} ${section}`);
+) => fold(`${item.name} ${item.description ?? ""} ${item.tag ?? ""} ${section}`);
 
 export default function MenuBrowser() {
   const [active, setActive] = useState<FilterId>("all");
@@ -119,7 +119,7 @@ export default function MenuBrowser() {
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search drinks and ingredients"
+              placeholder="Search the menu"
               aria-label="Search the menu"
               className="w-full border border-taupe/40 bg-transparent py-2.5 pl-9 pr-9 text-[13px] font-light text-ink outline-none transition-colors duration-300 placeholder:text-taupe/80 focus:border-gold"
             />
@@ -145,7 +145,7 @@ export default function MenuBrowser() {
           >
             {term
               ? `${count} ${count === 1 ? "result" : "results"} for “${query.trim()}”`
-              : `${count} ${count === 1 ? "drink" : "drinks"}`}
+              : `${count} ${count === 1 ? "item" : "items"}`}
           </p>
 
           {count === 0 && (
@@ -156,7 +156,7 @@ export default function MenuBrowser() {
               <p className="m-0 mt-3 text-[14px] font-light leading-[1.8] text-clay">
                 {matchesElsewhere
                   ? "There are matches in other sections of the menu."
-                  : "Try a drink or an ingredient, like “mint” or “rum”."}
+                  : "Try a drink or item, like “mojito” or “whiskey”."}
               </p>
               <button
                 onClick={() => {
@@ -225,9 +225,11 @@ export default function MenuBrowser() {
                           </>
                         )}
                       </div>
-                      <p className="m-0 text-[13.5px] font-light leading-[1.7] text-clay text-pretty">
-                        <Highlight text={item.description} query={query} />
-                      </p>
+                      {item.description && (
+                        <p className="m-0 text-[13.5px] font-light leading-[1.7] text-clay text-pretty">
+                          <Highlight text={item.description} query={query} />
+                        </p>
+                      )}
                       {item.tag && (
                         <span
                           className={`mt-1 self-start px-2.5 py-1 text-[9px] uppercase tracking-[0.24em] ${
