@@ -1,6 +1,13 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import { whatsappHref, whatsappNumber } from "./WhatsAppButton";
+import {
+  BUSINESS_ADDRESS,
+  BUSINESS_LOCATION,
+  BUSINESS_MOTTO,
+  BUSINESS_PHONE_DISPLAY,
+  BUSINESS_PHONE_HREF,
+} from "@/lib/business";
 
 export default function Footer() {
   return (
@@ -9,20 +16,17 @@ export default function Footer() {
         <div>
           <Logo variant="stacked" className="h-auto w-[min(260px,72%)]" />
           <p className="mt-6 max-w-[38ch] text-[15px] font-light leading-[1.9] text-stone/80">
-            A modern classic in Old Bodija — where timeless flavours meet contemporary
-            elegance, nightly from noon until eleven.
+            {BUSINESS_MOTTO}
           </p>
         </div>
 
         <div>
           <p className="eyebrow mb-5 text-taupe">Visit</p>
           <p className="text-[15px] font-light leading-[1.9] text-stone/85">
-            14 Awolowo Avenue
-            <br />
-            Old Bodija, Ibadan
+            {BUSINESS_ADDRESS}
           </p>
-          <a href="tel:+2348012345678" className="mt-4 block text-[15px] text-gold">
-            +234 801 234 5678
+          <a href={BUSINESS_PHONE_HREF} className="mt-4 block text-[15px] text-gold">
+            {BUSINESS_PHONE_DISPLAY}
           </a>
           <a
             href={whatsappHref}
@@ -52,7 +56,7 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} Avanti Ristorante
         </p>
         <p className="m-0 text-[10px] uppercase tracking-[0.26em] text-taupe">
-          Ibadan &middot; Est. 2019
+          {BUSINESS_LOCATION}
         </p>
       </div>
     </footer>

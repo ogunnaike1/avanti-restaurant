@@ -5,6 +5,7 @@ import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import ReserveButton from "@/components/ReserveButton";
 import { signatures } from "@/lib/menu";
+import { BUSINESS_PHONE_DISPLAY, BUSINESS_PHONE_HREF } from "@/lib/business";
 
 const stats = [
   { value: "07", label: "Years open" },
@@ -181,7 +182,7 @@ export default function HomePage() {
           </div>
           <div>
             <p className="m-0 mb-7 max-w-[44ch] text-base font-light leading-[1.9] text-cocoa">
-              Dinner is served nightly from 12:00 until 23:00. For parties of eight or more, or for
+              We are open daily from 12:00 until 23:00. For parties of eight or more, or for
               the tasting room, call the house directly.
             </p>
             <div className="flex flex-wrap gap-3.5">
@@ -189,10 +190,10 @@ export default function HomePage() {
                 Reserve a Table
               </ReserveButton>
               <a
-                href="tel:+2348012345678"
+                href={BUSINESS_PHONE_HREF}
                 className="inline-flex items-center border border-wine/35 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-wine transition-colors duration-400 hover:border-wine"
               >
-                +234 801 234 5678
+                {BUSINESS_PHONE_DISPLAY}
               </a>
             </div>
           </div>

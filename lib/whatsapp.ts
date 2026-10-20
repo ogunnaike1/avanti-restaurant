@@ -1,4 +1,5 @@
 import type { Reservation } from "./reservations";
+import { BUSINESS_PHONE, BUSINESS_PHONE_DISPLAY } from "./business";
 
 /*
  * The house WhatsApp line. Bookings are handed to WhatsApp rather than emailed:
@@ -9,10 +10,10 @@ import type { Reservation } from "./reservations";
  */
 
 /** Digits only — wa.me wants E.164 without the leading plus. */
-export const WHATSAPP_NUMBER = "2348131561562";
+export const WHATSAPP_NUMBER = BUSINESS_PHONE;
 
 /** The same line, formatted for reading. */
-export const WHATSAPP_DISPLAY = "+234 813 156 1562";
+export const WHATSAPP_DISPLAY = BUSINESS_PHONE_DISPLAY;
 
 /** Opening line for the float button, where there is no booking to quote. */
 export const WHATSAPP_GREETING =

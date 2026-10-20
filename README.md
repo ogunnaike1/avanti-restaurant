@@ -80,9 +80,9 @@ and it rounds the corners itself. The shortcut is named by `appleWebApp.title` i
 
 `WhatsAppButton` is mounted once in the root layout and floats bottom-right on every page at
 `z-[55]` — under the booking dialog (`z-[80]`), so it never covers the form. It links to
-`wa.me/2348131561562` with a prefilled message, which opens the app on a phone and WhatsApp Web on
-a desktop. The number and href are exported from that file and reused by the footer and the contact
-page, so there is one place to change it.
+`wa.me/2349158671409` with a prefilled message, which opens the app on a phone and WhatsApp Web on
+a desktop. The contact number, address, location, and motto are maintained in `lib/business.ts`
+and reused across pages, metadata, call links, and WhatsApp bookings.
 
 ## Design tokens
 
@@ -162,9 +162,9 @@ That means there are no credentials, no mail server and no API keys to keep aliv
 **the booking only arrives when the guest presses send in WhatsApp.** The confirmation screen says
 so plainly ("the table is not held until you do"), because nothing else records the booking off-box.
 
-The house number is defined once, as `WHATSAPP_NUMBER` in `lib/whatsapp.ts`. The float button,
-footer, contact page and booking form all read it from there, so changing it in that one place
-updates every surface.
+The house number is defined once, as `BUSINESS_PHONE` in `lib/business.ts`, and exposed as
+`WHATSAPP_NUMBER` by `lib/whatsapp.ts`. The float button, footer, contact page and booking form
+all share that number, so changing it in one place updates every surface.
 
 `lib/reservations.ts` still appends each booking to `.data/reservations.json` as a local
 convenience copy. That write is best-effort and never blocks a booking: serverless hosts (Vercel

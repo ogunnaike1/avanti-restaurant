@@ -8,13 +8,13 @@ import ReserveButton from "@/components/ReserveButton";
 export const metadata: Metadata = {
   title: "Our Story — AVANTI",
   description:
-    "Seven years in Old Bodija: the room, the kitchen, and the people who keep AVANTI running.",
+    "Discover AVANTI in Akobo, Ibadan: the room, the kitchen, and the people who keep the house running.",
 };
 
 const chapters = [
   {
     year: "2019",
-    title: "A room on Awolowo Avenue",
+    title: "Our first dining room",
     body: "Forty-two seats, one wood grill and a wine list of eleven bottles. The first service ran an hour late and sold out anyway.",
   },
   {

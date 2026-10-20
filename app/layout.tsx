@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReservationProvider from "@/components/ReservationProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { BUSINESS_LOCATION, BUSINESS_MOTTO } from "@/lib/business";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -23,8 +24,7 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: "AVANTI — Modern Classic Dining, Ibadan",
-  description:
-    "AVANTI — a modern classic restaurant where timeless flavours meet contemporary elegance. Reserve a table.",
+  description: `AVANTI — ${BUSINESS_MOTTO}. Visit us in ${BUSINESS_LOCATION}. Reserve a table on WhatsApp.`,
   applicationName: "AVANTI",
   // What iOS uses when the site is saved to the home screen. The icon itself is
   // app/apple-icon.png, which Next links as apple-touch-icon.

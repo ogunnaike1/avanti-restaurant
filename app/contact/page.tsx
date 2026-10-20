@@ -4,16 +4,21 @@ import Logo from "@/components/Logo";
 import Reveal from "@/components/Reveal";
 import { whatsappHref, whatsappNumber } from "@/components/WhatsAppButton";
 import ReservationForm from "@/components/ReservationForm";
+import {
+  BUSINESS_ADDRESS,
+  BUSINESS_PHONE_DISPLAY,
+  BUSINESS_PHONE_HREF,
+} from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Reservations — AVANTI",
-  description: "Reserve a table at AVANTI, Old Bodija, Ibadan. Served nightly 12:00 – 23:00.",
+  description: `Reserve a table at AVANTI. Visit us at ${BUSINESS_ADDRESS} Open daily 12:00 – 23:00.`,
 };
 
 const details = [
-  { label: "Address", lines: ["14 Awolowo Avenue", "Old Bodija, Ibadan"] },
+  { label: "Address", lines: [BUSINESS_ADDRESS] },
   { label: "Hours", lines: ["Monday – Sunday", "12:00 – 23:00"] },
-  { label: "Telephone", lines: ["+234 801 234 5678"], href: "tel:+2348012345678" },
+  { label: "Telephone", lines: [BUSINESS_PHONE_DISPLAY], href: BUSINESS_PHONE_HREF },
   { label: "WhatsApp", lines: [whatsappNumber], href: whatsappHref, external: true },
   { label: "Email", lines: ["reservations@avanti.ng"], href: "mailto:reservations@avanti.ng" },
 ];
@@ -31,8 +36,8 @@ export default function ContactPage() {
             <em>is waiting.</em>
           </h1>
           <p className="m-0 max-w-[52ch] text-base font-light leading-[1.9] text-stone text-pretty">
-            Request a table below and the house will confirm by phone. For the tasting room or
-            parties of eight or more, please call us directly.
+            Fill in your details below, then send your request on WhatsApp for confirmation.
+            For the tasting room or parties of eight or more, please call us directly.
           </p>
         </div>
       </section>

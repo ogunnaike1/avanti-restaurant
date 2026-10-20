@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
+import { BUSINESS_LOCATION, BUSINESS_MOTTO } from "@/lib/business";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "AVANTI — Fine Dining Restaurant",
     short_name: "AVANTI",
-    description:
-      "A modern classic in Old Bodija, Ibadan — where timeless flavours meet contemporary elegance.",
+    description: `${BUSINESS_MOTTO}. Visit AVANTI in ${BUSINESS_LOCATION}.`,
     start_url: "/",
     display: "standalone",
     background_color: "#380109",
