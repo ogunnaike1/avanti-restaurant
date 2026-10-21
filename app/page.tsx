@@ -5,13 +5,6 @@ import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import ReserveButton from "@/components/ReserveButton";
 import { signatures } from "@/lib/menu";
-import { BUSINESS_PHONE_DISPLAY, BUSINESS_PHONE_HREF } from "@/lib/business";
-
-const stats = [
-  { value: "07", label: "Years open" },
-  { value: "42", label: "Seats nightly" },
-  { value: "01", label: "Tasting room" },
-];
 
 export default function HomePage() {
   return (
@@ -21,29 +14,25 @@ export default function HomePage() {
       <section className="bg-cream px-[clamp(20px,5vw,64px)] py-[clamp(84px,12vw,160px)]">
         <div className="mx-auto grid max-w-[1240px] items-center gap-[clamp(36px,6vw,88px)] lg:grid-cols-2">
           <Reveal>
-            <p className="eyebrow m-0 mb-5 text-taupe">The house</p>
+            <p className="eyebrow m-0 mb-5 text-taupe">Introduction</p>
             <h2 className="m-0 mb-7 font-serif text-[clamp(38px,5.4vw,74px)] font-light leading-[1.02] text-wine text-pretty">
               More than a meal.
               <br />
-              <em className="font-light">An experience.</em>
+              <em className="font-light">A place to unwind.</em>
             </h2>
             <p className="m-0 mb-5 max-w-[54ch] text-base font-light leading-[1.9] text-cocoa text-pretty">
-              AVANTI is a dining room in the old European sense &mdash; low light, linen, a fire in
-              the kitchen &mdash; rebuilt for the way Ibadan eats now. Produce arrives each morning;
-              the menu answers to it.
+              Life moves quickly. Sometimes, the best thing you can do is slow down, settle in and
+              enjoy where you are.
             </p>
-            <p className="m-0 mb-9 max-w-[54ch] text-[15px] font-light leading-[1.9] text-clay text-pretty">
-              Everything here is made in-house: the pasta, the bread, the ice in your glass. What we
-              cannot make beautifully, we do not serve.
+            <p className="m-0 mb-5 max-w-[54ch] text-[15px] font-light leading-[1.9] text-clay text-pretty">
+              At AVANTI, the experience extends beyond the table. From the details of our
+              surroundings to the atmosphere that welcomes you in, every visit offers an
+              opportunity to step away from the everyday and enjoy time well spent.
             </p>
-            <div className="flex flex-wrap gap-11 border-t border-taupe/30 pt-7">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <p className="m-0 font-serif text-[40px] leading-none text-gold">{stat.value}</p>
-                  <p className="eyebrow mt-1.5 tracking-[0.24em] text-taupe">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+            <p className="m-0 max-w-[54ch] font-serif text-[22px] italic leading-[1.5] text-wine text-pretty">
+              Come for a meal. Stay for the conversations, the company and the moments that make
+              the evening yours.
+            </p>
           </Reveal>
 
           <Reveal direction="right" className="relative">
@@ -54,14 +43,6 @@ export default function HomePage() {
                 sizes="(max-width: 1024px) 100vw, 45vw"
               />
             </Parallax>
-            <div className="absolute -bottom-[18px] -left-[18px] max-w-[60%] bg-wine px-6 py-5">
-              <p className="m-0 font-serif text-[19px] italic leading-[1.4] text-linen">
-                &ldquo;A room that knows exactly what it is.&rdquo;
-              </p>
-              <p className="m-0 mt-2.5 text-[9.5px] uppercase tracking-[0.26em] text-gold">
-                Guardian Life
-              </p>
-            </div>
           </Reveal>
         </div>
       </section>
@@ -130,21 +111,26 @@ export default function HomePage() {
         />
         <Reveal className="relative mx-auto w-full max-w-[1240px] px-[clamp(20px,5vw,64px)] py-[clamp(80px,12vw,150px)]">
           <div className="max-w-[640px]">
-            <p className="eyebrow m-0 mb-5 text-gold">The AVANTI experience</p>
+            <p className="eyebrow m-0 mb-5 text-gold">The ambience</p>
             <h2 className="m-0 mb-6 font-serif text-[clamp(40px,6vw,86px)] font-light leading-none text-ivory">
-              Where every
+              Take a moment.
               <br />
-              <em>detail matters.</em>
+              <em>Look around.</em>
             </h2>
             <p className="m-0 mb-9 max-w-[48ch] text-base font-light leading-[1.9] text-stone text-pretty">
-              From the weight of the glassware to the last pour of the evening, the room is composed
-              like a menu &mdash; deliberately, and in your favour.
+              Sometimes, it is the little details that make a place unforgettable. At AVANTI, the
+              surroundings are part of the experience. Take in the atmosphere, enjoy the
+              distinctive presence of our aquarium and give yourself permission to slow down.
+            </p>
+            <p className="m-0 mb-9 max-w-[48ch] text-base font-light leading-[1.9] text-stone text-pretty">
+              Whether you&apos;re sharing a quiet dinner, catching up with friends or enjoying time
+              with family, AVANTI offers a setting designed to be experienced, not rushed.
             </p>
             <Link
               href="/about"
               className="inline-block border border-gold/60 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-cream transition-colors duration-400 hover:bg-gold hover:text-wine"
             >
-              Our Story
+              Discover AVANTI
             </Link>
           </div>
         </Reveal>
@@ -154,48 +140,74 @@ export default function HomePage() {
         <Reveal className="mx-auto max-w-[900px]">
           <p className="eyebrow m-0 mb-6 text-taupe">The menu</p>
           <h2 className="m-0 mb-6 font-serif text-[clamp(40px,7vw,96px)] font-light leading-none text-wine">
-            Come hungry.
+            Something to
             <br />
-            <em>Leave inspired.</em>
+            <em>look forward to.</em>
           </h2>
           <p className="mx-auto mb-10 max-w-[48ch] text-base font-light leading-[1.9] text-clay">
-            Five courses, one wine list, and a kitchen that changes its mind with the seasons.
+            Good food has a way of bringing people together. Explore a menu that brings Nigerian
+            and international cuisine to the table, with something to look forward to as you
+            settle in and enjoy the experience.
+          </p>
+          <p className="mx-auto mb-10 max-w-[48ch] font-serif text-xl italic text-wine">
+            Come curious. Find your favourites. Make a meal of it.
           </p>
           <Link
             href="/menu"
             className="inline-block border border-wine bg-wine px-10 py-[19px] text-[11px] font-semibold uppercase tracking-[0.22em] text-linen transition-all duration-400 hover:border-gold hover:bg-gold hover:tracking-[0.3em] hover:text-wine"
           >
-            Explore Full Menu
+            Explore Our Menu
           </Link>
         </Reveal>
       </section>
 
-      <section className="bg-sand px-[clamp(20px,5vw,64px)] py-[clamp(80px,11vw,140px)]">
-        <Reveal className="mx-auto grid max-w-[1240px] items-center gap-[clamp(30px,5vw,70px)] lg:grid-cols-2">
-          <div>
-            <p className="eyebrow m-0 mb-5 text-clay">Reservations</p>
-            <h2 className="m-0 font-serif text-[clamp(38px,5.6vw,78px)] font-light leading-none text-wine">
-              Your table
-              <br />
-              <em>is waiting.</em>
-            </h2>
-          </div>
-          <div>
-            <p className="m-0 mb-7 max-w-[44ch] text-base font-light leading-[1.9] text-cocoa">
-              We are open daily from 12:00 until 23:00. For parties of eight or more, or for
-              the tasting room, call the house directly.
-            </p>
-            <div className="flex flex-wrap gap-3.5">
-              <ReserveButton className="border border-wine bg-wine px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-linen transition-colors duration-400 hover:border-gold hover:bg-gold hover:text-wine">
-                Reserve a Table
-              </ReserveButton>
-              <a
-                href={BUSINESS_PHONE_HREF}
-                className="inline-flex items-center border border-wine/35 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-wine transition-colors duration-400 hover:border-wine"
-              >
-                {BUSINESS_PHONE_DISPLAY}
-              </a>
-            </div>
+      <section className="bg-sand px-[clamp(20px,5vw,64px)] py-[clamp(80px,11vw,140px)] text-center">
+        <Reveal className="mx-auto max-w-[820px]">
+          <p className="eyebrow m-0 mb-6 text-clay">Your occasion</p>
+          <h2 className="m-0 mb-6 font-serif text-[clamp(36px,5.6vw,78px)] font-light leading-none text-wine">
+            However you come,
+            <br />
+            <em>make it a moment.</em>
+          </h2>
+          <p className="mx-auto mb-5 max-w-[48ch] font-serif text-xl italic text-wine">
+            Not every memorable evening needs a reason.
+          </p>
+          <p className="mx-auto mb-5 max-w-[52ch] text-base font-light leading-[1.9] text-cocoa text-pretty">
+            Perhaps it&apos;s a date night. A birthday. A long overdue catch-up with friends. A
+            family dinner. Or simply the desire to enjoy somewhere different.
+          </p>
+          <p className="mx-auto max-w-[52ch] text-base font-light leading-[1.9] text-cocoa text-pretty">
+            Whatever brings you to AVANTI, there&apos;s room to make the moment your own.
+          </p>
+        </Reveal>
+      </section>
+
+      <section className="bg-wine px-[clamp(20px,5vw,64px)] py-[clamp(80px,11vw,140px)] text-center">
+        <Reveal className="mx-auto max-w-[820px]">
+          <h2 className="m-0 mb-6 font-serif text-[clamp(38px,5.6vw,78px)] font-light leading-none text-ivory">
+            Your time at AVANTI
+            <br />
+            <em>awaits.</em>
+          </h2>
+          <p className="mx-auto mb-4 max-w-[48ch] font-serif text-xl italic text-linen">
+            Good food. A beautiful setting. Time with your favourite people.
+          </p>
+          <p className="mx-auto mb-3 max-w-[48ch] text-base font-light leading-[1.9] text-stone">
+            Make space for an experience worth remembering.
+          </p>
+          <p className="mx-auto mb-10 max-w-[48ch] text-base font-light leading-[1.9] text-stone">
+            We look forward to welcoming you to AVANTI Fine Dining, Ibadan.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3.5">
+            <ReserveButton className="border border-gold bg-gold px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-wine transition-colors duration-400 hover:bg-transparent hover:text-gold">
+              Reserve Your Table
+            </ReserveButton>
+            <Link
+              href="/contact"
+              className="inline-flex items-center border border-cream/45 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-cream transition-colors duration-400 hover:border-cream hover:bg-cream hover:text-wine"
+            >
+              Find Us
+            </Link>
           </div>
         </Reveal>
       </section>

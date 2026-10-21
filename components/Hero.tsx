@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ImageSlot from "./ImageSlot";
 import Logo from "./Logo";
 import ReserveButton from "./ReserveButton";
-import { BUSINESS_LOCATION, BUSINESS_MOTTO } from "@/lib/business";
+import { BUSINESS_LOCATION } from "@/lib/business";
 
 const slides = [
   {
@@ -19,19 +19,19 @@ const slides = [
     id: "av-hero-2",
     src: "/images/hero-plated-dish.jpg",
     label: "A signature plate going to the table",
-    caption: "Seasonal · Written each morning",
+    caption: "Nigerian & international cuisine",
   },
   {
     id: "av-hero-3",
     src: "/images/hero-chef-pass.jpg",
     label: "The chef finishing a plate at the pass",
-    caption: "Cooked over fire and butter",
+    caption: "Fine dining, Ibadan",
   },
   {
     id: "av-hero-4",
     src: "/images/hero-evening-bar.jpg",
     label: "The bar in the evening",
-    caption: "Long evenings · 42 seats nightly",
+    caption: "Time well spent",
   },
 ];
 
@@ -112,9 +112,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="m-0 max-w-[24ch] font-serif text-[clamp(24px,3.4vw,44px)] font-light italic leading-[1.15] text-linen"
+          className="m-0 max-w-[18ch] font-serif text-[clamp(24px,3.4vw,44px)] font-light italic leading-[1.15] text-linen"
         >
-          {BUSINESS_MOTTO}
+          A place to be.
+          <br />
+          A moment to savour.
         </motion.p>
 
         <motion.p
@@ -123,8 +125,13 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.28 }}
           className="m-0 max-w-[52ch] text-[clamp(14px,1.3vw,17px)] font-light leading-[1.85] text-stone text-pretty"
         >
-          A modern dining experience where timeless flavours meet contemporary elegance — served
-          in a room built for long evenings and memories that last.
+          <span className="mb-3 block font-serif text-[clamp(18px,1.8vw,24px)] italic text-linen">
+            Some evenings deserve more than the usual.
+          </span>
+          Discover AVANTI Fine Dining, Ibadan, where exceptional surroundings, Nigerian and
+          international cuisine, and time well spent come together. Whether you&apos;re planning a
+          special celebration or simply looking for somewhere to unwind with the people who
+          matter, there&apos;s a place for you at AVANTI.
         </motion.p>
 
         <motion.div
@@ -137,10 +144,10 @@ export default function Hero() {
             href="/menu"
             className="border border-gold bg-gold px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-wine transition-all duration-400 hover:bg-transparent hover:tracking-[0.3em] hover:text-gold"
           >
-            Explore Our Menu
+            Explore the Menu
           </Link>
           <ReserveButton className="border border-cream/45 px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-cream transition-all duration-400 hover:border-cream hover:bg-cream hover:text-wine">
-            Reserve a Table
+            Reserve Your Table
           </ReserveButton>
         </motion.div>
 
