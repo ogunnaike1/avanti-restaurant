@@ -1,31 +1,23 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 /**
- * Temporary site lock. While SITE_PASSWORD is set, every request needs it via
- * the browser's built-in login prompt (any username, password must match).
- * Remove SITE_PASSWORD to open the site again.
+ * Temporary site lock. While SITE_PASSWORD is set, visitors without the access
+ * cookie are served an empty page, so none of the real page content is rendered
+ * or sent; app/layout.tsx shows the password gate in its place.
  */
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const password = process.env.SITE_PASSWORD;
   if (!password) return NextResponse.next();
 
-  const header = request.headers.get("authorization");
-  if (header?.startsWith("Basic ")) {
-    try {
-      const decoded = atob(header.slice(6));
-      const supplied = decoded.slice(decoded.indexOf(":") + 1);
-      if (supplied === password) return NextResponse.next();
-    } catch {
-      // Malformed header: fall through to the challenge.
-    }
-  }
+  const data = new TextEncoder().encode(`avanti-lock:${password}`);
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  const token = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
 
-  return new NextResponse("Password required.", {
-    status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="AVANTI (private preview)"' },
-  });
+  if (request.cookies.get("avanti_access")?.value === token) return NextResponse.next();
+  return NextResponse.rewrite(new URL("/unlock", request.url));
 }
 
 export const config = {
-  matcher: "/((?!_next/static|_next/image).*)",
+  // Everything except the unlock endpoint, build assets and public files.
+  matcher: "/((?!api/unlock|_next/|.*\\.[a-zA-Z0-9]+$).*)",
 };

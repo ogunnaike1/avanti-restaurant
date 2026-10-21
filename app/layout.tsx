@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import Nav from "@/components/Nav";
@@ -5,6 +6,8 @@ import Footer from "@/components/Footer";
 import ReservationProvider from "@/components/ReservationProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { BUSINESS_LOCATION, BUSINESS_MOTTO } from "@/lib/business";
+import PasswordGate from "@/components/PasswordGate";
+import { LOCK_COOKIE, lockPassword, lockToken } from "@/lib/lock";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -43,16 +46,24 @@ export const viewport: Viewport = {
   themeColor: "#380109",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const password = lockPassword();
+  const locked =
+    !!password && (await cookies()).get(LOCK_COOKIE)?.value !== lockToken(password);
+
   return (
     <html lang="en" className={`${cormorant.variable} ${manrope.variable}`}>
       <body className="overflow-x-hidden font-sans">
-        <ReservationProvider>
-          <Nav />
-          {children}
-          <Footer />
-          <WhatsAppButton />
-        </ReservationProvider>
+        {locked ? (
+          <PasswordGate />
+        ) : (
+          <ReservationProvider>
+            <Nav />
+            {children}
+            <Footer />
+            <WhatsAppButton />
+          </ReservationProvider>
+        )}
       </body>
     </html>
   );
