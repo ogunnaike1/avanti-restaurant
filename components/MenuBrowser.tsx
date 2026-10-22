@@ -5,8 +5,17 @@ import { motion } from "framer-motion";
 import ImageSlot from "./ImageSlot";
 import { menu, type MenuGroup } from "@/lib/menu";
 
-/** Which side of the menu each section belongs to. Only soups are food so far. */
-const FOOD_GROUPS: MenuGroup["id"][] = ["soups"];
+/** Which side of the menu each section belongs to. */
+const FOOD_GROUPS: MenuGroup["id"][] = [
+  "starters",
+  "soups",
+  "salads",
+  "burgers",
+  "pasta",
+  "sides",
+  "platters",
+  "desserts",
+];
 const kindOf = (group: MenuGroup) => (FOOD_GROUPS.includes(group.id) ? "food" : "drinks");
 
 const foodGroups = menu.filter((group) => kindOf(group) === "food");
@@ -90,6 +99,22 @@ export default function MenuBrowser() {
       .filter((group) => group.items.length > 0);
   }, [active, term]);
 
+  /** Desktop chips: the quick filters, then the sections once Food or Drinks is chosen. */
+  const activeKind =
+    active === "food" || active === "drinks"
+      ? active
+      : active === "all"
+        ? "all"
+        : kindOf(menu.find((group) => group.id === active) as MenuGroup);
+  const visibleFilters: Filter[] = [
+    ...filters.slice(0, 3),
+    ...(activeKind === "food"
+      ? groupFilters(foodGroups)
+      : activeKind === "drinks"
+        ? groupFilters(drinkGroups)
+        : []),
+  ];
+
   const count = groups.reduce((sum, group) => sum + group.items.length, 0);
 
   // Would widening to every section actually turn anything up?
@@ -142,8 +167,8 @@ export default function MenuBrowser() {
             </svg>
           </div>
 
-          <div className="no-scrollbar -mb-1 hidden gap-[clamp(18px,3vw,42px)] overflow-x-auto pb-1 lg:flex">
-            {filters.map((filter) => (
+          <div className="hidden flex-wrap gap-x-[clamp(18px,2.4vw,34px)] gap-y-1 lg:flex">
+            {visibleFilters.map((filter) => (
               <button
                 key={filter.id}
                 onClick={() => setActive(filter.id)}
@@ -159,7 +184,7 @@ export default function MenuBrowser() {
             ))}
           </div>
 
-          <div className="relative w-full lg:w-[300px]">
+          <div className="relative w-full lg:w-[300px] lg:shrink-0">
             <svg
               viewBox="0 0 24 24"
               aria-hidden
@@ -212,7 +237,7 @@ export default function MenuBrowser() {
               <p className="m-0 mt-3 text-[14px] font-light leading-[1.8] text-clay">
                 {matchesElsewhere
                   ? "There are matches in other sections of the menu."
-                  : "Try a drink or item, like “mojito” or “whiskey”."}
+                  : "Try a dish or drink, like “burger” or “mojito”."}
               </p>
               <button
                 onClick={() => {

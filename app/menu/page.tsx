@@ -4,7 +4,7 @@ import MenuBrowser from "@/components/MenuBrowser";
 export const metadata: Metadata = {
   title: "The Menu — AVANTI",
   description:
-    "Soups, cocktails, mocktails, milkshakes, smoothies and premium spirits.",
+    "Starters, soups, burgers, pasta and platters, with cocktails, mocktails, milkshakes, smoothies, wine and spirits at AVANTI Restaurant, Ibadan.",
 };
 
 export default function MenuPage() {
@@ -17,7 +17,7 @@ export default function MenuPage() {
             The Menu
           </h1>
           <p className="mx-auto m-0 max-w-[52ch] text-base font-light leading-[1.9] text-stone text-pretty">
-            Soups, cocktails, mocktails, milkshakes, smoothies and a selection of fine spirits. Prices are in naira.
+            Starters, soups, salads, burgers, pasta, platters and desserts, with cocktails, mocktails, milkshakes, smoothies, wine and spirits. Prices are in naira.
           </p>
         </div>
       </section>
