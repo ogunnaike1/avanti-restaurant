@@ -4,8 +4,8 @@ import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import Logo from "./Logo";
 import { longDate, WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { RESERVATION_TIMES } from "@/lib/business";
 
-const times = ["12:00", "13:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 const sizes = ["1", "2", "3", "4", "5", "6", "7", "8+"];
 
 const fieldClass =
@@ -234,7 +234,7 @@ export default function ReservationForm({
                 defaultValue="19:00"
                 className={fieldClass}
               >
-                {times.map((time) => (
+                {RESERVATION_TIMES.map((time) => (
                   <option key={time} value={time}>
                     {time}
                   </option>

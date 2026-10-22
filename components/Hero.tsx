@@ -53,25 +53,41 @@ export default function Hero() {
       aria-label="AVANTI"
       className="relative flex min-h-[min(100svh,900px)] items-center overflow-hidden bg-wine"
     >
-      <AnimatePresence>
+      {/*
+        Every slide is mounted from the start, so the browser fetches all four
+        photographs up front instead of waiting for each one to come on screen
+        (which left a blank, fading-in frame while it downloaded). Only the first
+        is high priority; the rest load eagerly but at low priority.
+      */}
+      {slides.map((s, i) => (
         <motion.div
-          key={slide.id}
+          key={s.id}
+          aria-hidden={i !== index}
           className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={false}
+          animate={{ opacity: i === index ? 1 : 0 }}
           transition={{ duration: 1.6, ease: "easeInOut" }}
         >
           <motion.div
             className="absolute inset-0"
-            initial={{ scale: 1 }}
-            animate={{ scale: 1.09 }}
-            transition={{ duration: SLIDE_MS / 1000 + 2, ease: "linear" }}
+            initial={false}
+            animate={{ scale: i === index ? 1.09 : 1 }}
+            transition={
+              i === index
+                ? { duration: SLIDE_MS / 1000 + 2, ease: "linear" }
+                : { duration: 0, delay: 1.6 }
+            }
           >
-            <ImageSlot src={slide.src} label={slide.label} priority={index === 0} sizes="100vw" />
+            <ImageSlot
+              src={s.src}
+              label={s.label}
+              priority={i === 0}
+              eager
+              sizes="100vw"
+            />
           </motion.div>
         </motion.div>
-      </AnimatePresence>
+      ))}
 
       <div
         className="pointer-events-none absolute inset-0"

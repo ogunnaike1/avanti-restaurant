@@ -4,7 +4,13 @@ import ImageSlot from "@/components/ImageSlot";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import ReserveButton from "@/components/ReserveButton";
-import { BUSINESS_PROMISE, BUSINESS_TAGLINE } from "@/lib/business";
+import {
+  BUSINESS_HOURS,
+  BUSINESS_HOURS_DAYS,
+  BUSINESS_PROMISE,
+  BUSINESS_SEATS,
+  BUSINESS_TAGLINE,
+} from "@/lib/business";
 
 export default function HomePage() {
   return (
@@ -150,6 +156,9 @@ export default function HomePage() {
           </p>
           <p className="mx-auto mb-10 max-w-[48ch] text-base font-light leading-[1.9] text-stone">
             We look forward to welcoming you to AVANTI Fine Dining, Ibadan.
+          </p>
+          <p className="mx-auto mb-8 max-w-[48ch] text-[15px] font-light leading-[1.9] text-gold">
+            Open {BUSINESS_HOURS_DAYS}, {BUSINESS_HOURS} &middot; {BUSINESS_SEATS} seats
           </p>
           <div className="flex flex-wrap justify-center gap-3.5">
             <ReserveButton className="border border-gold bg-gold px-[34px] py-[18px] text-[11px] font-semibold uppercase tracking-[0.22em] text-wine transition-colors duration-400 hover:bg-transparent hover:text-gold">

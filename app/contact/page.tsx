@@ -5,20 +5,29 @@ import { whatsappHref, whatsappNumber } from "@/components/WhatsAppButton";
 import ReservationForm from "@/components/ReservationForm";
 import {
   BUSINESS_ADDRESS,
+  BUSINESS_HOURS,
+  BUSINESS_HOURS_DAYS,
+  BUSINESS_SEATS,
+  INSTAGRAM_URL,
+  SOCIAL_HANDLE,
+  TIKTOK_URL,
   BUSINESS_PHONE_DISPLAY,
   BUSINESS_PHONE_HREF,
 } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Reservations — AVANTI",
-  description: `Reserve a table at AVANTI. Visit us at ${BUSINESS_ADDRESS} Open daily 12:00 – 23:00.`,
+  description: `Reserve a table at AVANTI. Visit us at ${BUSINESS_ADDRESS} Open ${BUSINESS_HOURS_DAYS}, ${BUSINESS_HOURS}. ${BUSINESS_SEATS} seats.`,
 };
 
 const details = [
   { label: "Address", lines: [BUSINESS_ADDRESS] },
-  { label: "Hours", lines: ["Monday – Sunday", "12:00 – 23:00"] },
+  { label: "Hours", lines: [BUSINESS_HOURS_DAYS, BUSINESS_HOURS] },
+  { label: "Seating", lines: [`${BUSINESS_SEATS} seats`] },
   { label: "Telephone", lines: [BUSINESS_PHONE_DISPLAY], href: BUSINESS_PHONE_HREF },
   { label: "WhatsApp", lines: [whatsappNumber], href: whatsappHref, external: true },
+  { label: "Instagram", lines: [`@${SOCIAL_HANDLE}`], href: INSTAGRAM_URL, external: true },
+  { label: "TikTok", lines: [`@${SOCIAL_HANDLE}`], href: TIKTOK_URL, external: true },
 ];
 
 export default function ContactPage() {

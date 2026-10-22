@@ -2,11 +2,11 @@ import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { saveReservation, type Reservation } from "@/lib/reservations";
 import { reservationLink } from "@/lib/whatsapp";
+import { RESERVATION_TIMES } from "@/lib/business";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const TIMES = ["12:00", "13:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 const PARTY_SIZES = ["1", "2", "3", "4", "5", "6", "7", "8+"];
 
 const asString = (value: unknown) =>
@@ -39,7 +39,7 @@ function validate(body: Record<string, unknown>) {
     else if (chosen < today) errors.date = "That date has already passed.";
   }
 
-  if (!TIMES.includes(time)) errors.time = "Choose a sitting.";
+  if (!RESERVATION_TIMES.includes(time)) errors.time = "Choose a sitting.";
   if (!PARTY_SIZES.includes(guests)) errors.guests = "How many are joining?";
 
   return { errors, values: { name, email, phone, date, time, guests, notes } };

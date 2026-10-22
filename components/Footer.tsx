@@ -1,8 +1,12 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import SocialLinks from "./SocialLinks";
 import { whatsappHref, whatsappNumber } from "./WhatsAppButton";
 import {
   BUSINESS_ADDRESS,
+  BUSINESS_HOURS,
+  BUSINESS_HOURS_DAYS,
+  BUSINESS_SEATS,
   BUSINESS_LOCATION,
   BUSINESS_MOTTO,
   BUSINESS_PROMISE,
@@ -42,6 +46,12 @@ export default function Footer() {
           >
             WhatsApp {whatsappNumber}
           </a>
+          <p className="mb-0 mt-4 text-[15px] font-light leading-[1.9] text-stone/85">
+            {BUSINESS_HOURS_DAYS}, {BUSINESS_HOURS}
+            <br />
+            {BUSINESS_SEATS} seats
+          </p>
+          <SocialLinks className="mt-4" />
         </div>
 
         <div>

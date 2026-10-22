@@ -11,6 +11,8 @@ type Props = {
   className?: string;
   /** CSS object-position, to choose which part of the photo survives the crop. */
   position?: string;
+  /** Load right away, but without competing with the priority image. */
+  eager?: boolean;
 };
 
 /**
@@ -26,6 +28,7 @@ export default function ImageSlot({
   priority,
   className = "",
   position,
+  eager,
 }: Props) {
   if (!src) {
     return (
@@ -49,6 +52,7 @@ export default function ImageSlot({
         fill
         sizes={sizes}
         priority={priority}
+        {...(eager && !priority ? { loading: "eager" as const, fetchPriority: "low" as const } : {})}
         className="object-cover"
         style={position ? { objectPosition: position } : undefined}
       />

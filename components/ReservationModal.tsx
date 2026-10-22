@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Logo from "./Logo";
 import ReservationForm from "./ReservationForm";
-import { BUSINESS_LOCATION } from "@/lib/business";
+import { BUSINESS_HOURS, BUSINESS_HOURS_DAYS, BUSINESS_LOCATION } from "@/lib/business";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -114,7 +114,7 @@ export default function ReservationModal({
             Book your table
           </h2>
           <p className="m-0 mt-3 text-[13.5px] font-light leading-[1.7] text-clay">
-            Daily, 12:00 &ndash; 23:00 &middot; {BUSINESS_LOCATION}
+            {BUSINESS_HOURS_DAYS}, {BUSINESS_HOURS} &middot; {BUSINESS_LOCATION}
           </p>
         </div>
 

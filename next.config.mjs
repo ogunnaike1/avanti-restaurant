@@ -9,8 +9,9 @@ const nextConfig = {
   // Other lockfiles live higher up in C:\Workspace — pin the root to this app.
   outputFileTracingRoot: dir,
   images: {
-    // AVIF first: roughly a third the bytes of the JPEG source, WebP as fallback.
-    formats: ["image/avif", "image/webp"],
+    // WebP only: AVIF is smaller, but encoding it on the first request is slow, and
+    // that first request is what a visitor waits on for the hero photographs.
+    formats: ["image/webp"],
     // Optimised variants are immutable in practice — keep them cached for a month.
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
