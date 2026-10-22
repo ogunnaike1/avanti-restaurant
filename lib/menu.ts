@@ -7,6 +7,8 @@ export type MenuItem = {
   /** Selling price in naira, tax exclusive. */
   /** Omitted until the price is confirmed. */
   price?: string;
+  /** Several ways to buy the same thing, e.g. a measure or the bottle. Shown instead of `price`. */
+  options?: { label: string; price: string }[];
   /** Short menu blurb. */
   description?: string;
   /** Optional thumbnail; rows without one render without an image. */
@@ -193,23 +195,23 @@ export const menu: MenuGroup[] = [
     id: "spirits",
     title: "Spirits",
     items: [
-      item("Don Julio Tequila", undefined, 37500, "50 ml measure. Bottle (750 ml): ₦562,500."),
-      item("Casamigos Tequila", undefined, 15500, "50 ml measure. Bottle (750 ml): ₦229,500."),
-      item("Sierra Tequila", undefined, 5500, "50 ml measure. Bottle (700 ml): ₦71,000."),
-      item("Hennessy VSOP", undefined, 18000, "50 ml measure. Bottle (700 ml): ₦246,000."),
-      item("Absolut Vodka (Imported)", undefined, 4500, "50 ml measure. Bottle (700 ml): ₦60,500."),
-      item("Absolut Vodka (Plain)", undefined, 4500, "50 ml measure. Bottle (700 ml): ₦60,500."),
-      item("Gordon's Gin", undefined, 3000, "50 ml measure. Bottle (750 ml): ₦41,000."),
-      item("Bacardi White Rum", undefined, 4000, "50 ml measure. Bottle (750 ml): ₦56,500."),
-      item("Bacardi Gold Rum", undefined, 4000, "50 ml measure. Bottle (750 ml): ₦56,500."),
+      item("Don Julio Tequila", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦37,500" }, { label: "Bottle (750 ml)", price: "₦562,500" }] }),
+      item("Casamigos Tequila", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦15,500" }, { label: "Bottle (750 ml)", price: "₦229,500" }] }),
+      item("Sierra Tequila", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦5,500" }, { label: "Bottle (700 ml)", price: "₦71,000" }] }),
+      item("Hennessy VSOP", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦18,000" }, { label: "Bottle (700 ml)", price: "₦246,000" }] }),
+      item("Absolut Vodka (Imported)", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦4,500" }, { label: "Bottle (700 ml)", price: "₦60,500" }] }),
+      item("Absolut Vodka (Plain)", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦4,500" }, { label: "Bottle (700 ml)", price: "₦60,500" }] }),
+      item("Gordon's Gin", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦3,000" }, { label: "Bottle (750 ml)", price: "₦41,000" }] }),
+      item("Bacardi White Rum", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦4,000" }, { label: "Bottle (750 ml)", price: "₦56,500" }] }),
+      item("Bacardi Gold Rum", undefined, undefined, undefined, { options: [{ label: "Shot (50 ml)", price: "₦4,000" }, { label: "Bottle (750 ml)", price: "₦56,500" }] }),
     ],
   },
   {
     id: "wine",
     title: "Wine & Champagne",
     items: [
-      item("Four Cousins Wine", undefined, 3500, "Per glass (125 ml). Bottle (1.5 L): ₦41,000."),
-      item("Moët Champagne", undefined, 112000, "Per glass (125 ml). Bottle (750 ml): ₦670,000."),
+      item("Four Cousins Wine", undefined, undefined, undefined, { options: [{ label: "Glass (125 ml)", price: "₦3,500" }, { label: "Bottle (1.5 L)", price: "₦41,000" }] }),
+      item("Moët Champagne", undefined, undefined, undefined, { options: [{ label: "Glass (125 ml)", price: "₦112,000" }, { label: "Bottle (750 ml)", price: "₦670,000" }] }),
     ],
   },
   {
