@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Crimson_Text, Montserrat } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReservationProvider from "@/components/ReservationProvider";
@@ -10,24 +10,23 @@ import PasswordGate from "@/components/PasswordGate";
 import { LOCK_COOKIE, lockPassword, lockToken } from "@/lib/lock";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
+const crimson = Crimson_Text({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  weight: ["400", "600", "700"],
+  variable: "--font-crimson",
   display: "swap",
 });
 
-const manrope = Manrope({
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600"],
-  variable: "--font-manrope",
+  variable: "--font-montserrat",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "AVANTI — Modern Classic Dining, Ibadan",
-  description: `AVANTI — ${BUSINESS_MOTTO}. Visit us in ${BUSINESS_LOCATION}. Reserve a table on WhatsApp.`,
+  title: "AVANTI Restaurant — Fine Dining, Ibadan",
+  description: `AVANTI Restaurant — ${BUSINESS_MOTTO} Exceptional cuisine, elegant ambiance and impeccable service in ${BUSINESS_LOCATION}. Reserve a table on WhatsApp.`,
   applicationName: "AVANTI",
   // What iOS uses when the site is saved to the home screen. The icon itself is
   // app/apple-icon.png, which Next links as apple-touch-icon.
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#380109",
+  themeColor: "#580A1A",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -52,7 +51,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     !!password && (await cookies()).get(LOCK_COOKIE)?.value !== lockToken(password);
 
   return (
-    <html lang="en" className={`${cormorant.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${crimson.variable} ${montserrat.variable}`}>
       <body className="overflow-x-hidden font-sans">
         {locked ? (
           <PasswordGate />

@@ -21,7 +21,7 @@ export default function Parallax({
   const y = useTransform(scrollYProgress, [0, 1], [-strength, strength]);
 
   return (
-    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+    <div ref={ref} className={`${/\b(absolute|fixed)\b/.test(className) ? "" : "relative"} overflow-hidden ${className}`}>
       <motion.div style={{ y }} className="absolute inset-x-0 -inset-y-[14%]">
         {children}
       </motion.div>

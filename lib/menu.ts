@@ -149,10 +149,3 @@ export const menu: MenuGroup[] = [
     ],
   },
 ];
-
-export const signatures = [
-  { id: "av-dish-1", image: undefined, kicker: "Cocktail", name: "Mojito", description: "White rum, fresh mint, lime, sugar and soda over crushed ice", price: "₦11,000" },
-  { id: "av-dish-2", image: undefined, kicker: "Cocktail", name: "Piña Colada", description: "White rum, pineapple juice and cream of coconut", price: "₦12,000" },
-  { id: "av-dish-3", image: undefined, kicker: "Mocktail", name: "Chapman", description: "Fanta, Sprite, grenadine, cucumber and citrus over ice", price: "₦8,000" },
-  { id: "av-dish-4", image: undefined, kicker: "Milkshake", name: "Salted Caramel Milkshake", description: "Vanilla ice cream, cold whole milk, caramel and a pinch of salt", price: "₦10,000" },
-];

@@ -12,7 +12,7 @@ const fieldClass =
   "w-full border border-taupe/40 bg-transparent px-4 py-3.5 text-[15px] font-light text-ink outline-none transition-colors duration-300 placeholder:text-taupe/70 focus:border-gold";
 const labelClass =
   "mb-2 block text-[10px] uppercase tracking-[0.26em] text-taupe";
-const errorClass = "m-0 mt-1.5 text-[12px] font-light text-[#9B2C2C]";
+const errorClass = "m-0 mt-1.5 text-[12px] font-light text-[#B5402F]";
 
 type Confirmation = {
   reference: string;
@@ -280,7 +280,7 @@ export default function ReservationForm({
             {formError && (
               <p
                 role="alert"
-                className="m-0 mb-3 border border-[#9B2C2C]/40 px-4 py-3 text-[13px] font-light text-[#9B2C2C]"
+                className="m-0 mb-3 border border-[#B5402F]/40 px-4 py-3 text-[13px] font-light text-[#B5402F]"
               >
                 {formError}
               </p>

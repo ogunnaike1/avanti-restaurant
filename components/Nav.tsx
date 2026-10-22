@@ -47,7 +47,7 @@ export default function Nav() {
         aria-label="Primary"
         className={`fixed inset-x-0 top-0 z-[60] flex items-center justify-between gap-5 border-b px-[clamp(18px,5vw,64px)] backdrop-blur-[6px] transition-all duration-500 ease-out ${
           scrolled
-            ? "border-taupe/30 bg-[rgba(56,1,9,0.92)] py-2.5"
+            ? "border-taupe/30 bg-[rgba(88,10,26,0.92)] py-2.5"
             : "border-transparent bg-transparent py-4"
         }`}
       >

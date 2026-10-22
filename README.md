@@ -14,7 +14,7 @@ npm run build   # production build
 
 | Path | What it is |
 | --- | --- |
-| `app/page.tsx` | Home — hero slideshow, house intro, signature dishes, parallax feature, reservation CTA |
+| `app/page.tsx` | Home — hero slideshow, house intro, popular dishes, parallax feature, reservation CTA |
 | `app/menu/page.tsx` | Menu — hero, photo strip, and `MenuBrowser` (search + section filters) |
 | `app/about/page.tsx` | Our story — kitchen, milestones, team |
 | `app/contact/page.tsx` | Reservations — form plus house details |
@@ -109,7 +109,7 @@ placeholder whenever `src` is absent:
 | --- | --- |
 | `hero-dining-room`, `hero-plated-dish`, `hero-chef-pass`, `hero-evening-bar` | Home hero slideshow |
 | `intro-dining-room` | Home — "More than a meal" |
-| `dish-risotto`, `dish-ribeye`, `dish-linguine`, `dish-fondant` | Home — signature dish cards (paths live in `lib/menu.ts`) |
+| `dish-risotto`, `dish-ribeye`, `dish-linguine`, `dish-fondant` | Home — popular dish cards (paths live in `lib/menu.ts`) |
 | `experience-table` | Home — full-bleed parallax band |
 | `menu-burrata`, `menu-seabass`, `menu-negroni` | Menu — photo strip, and the matching item rows |
 | `item-*` | Menu — one thumbnail per dish (paths live in `lib/menu.ts`; shown at every breakpoint) |

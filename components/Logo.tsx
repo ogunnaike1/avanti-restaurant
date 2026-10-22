@@ -13,20 +13,20 @@ import Image from "next/image";
 const art = {
   stacked: {
     src: "/avanti-stacked.png",
-    width: 1000,
-    height: 696,
-    alt: "AVANTI — Cafe, Restaurant",
+    width: 2000,
+    height: 1302,
+    alt: "AVANTI Restaurant",
   },
   wordmark: {
     src: "/avanti-wordmark.png",
-    width: 1000,
-    height: 162,
-    alt: "AVANTI",
+    width: 2000,
+    height: 410,
+    alt: "AVANTI Restaurant",
   },
   monogram: {
     src: "/avanti-monogram.png",
-    width: 512,
-    height: 400,
+    width: 1000,
+    height: 793,
     alt: "AVANTI",
   },
 } as const;

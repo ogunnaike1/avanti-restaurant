@@ -1,4 +1,10 @@
 /*
+ * NOTE: the logos in public/ and the app icons now come from the brand book PDF
+ * ("avanti vook.pdf"), traced to vector (public/avanti-*.svg) and rendered to PNG, not from assets/avanti-logo.jpeg. Running this script
+ * would overwrite them with the OLD artwork. Only run it with a new source file:
+ * node scripts/prep-logo.js <artwork>
+ */
+/*
  * Prepares the supplied AVANTI artwork for the site.
  *
  * The gold is bevelled, and the shadow side of every letter is the same maroon as
@@ -156,12 +162,12 @@ async function build(src, out, { crop, pad = 0.07, feather = 0.13, width } = {})
       .toBuffer();
 
     await sharp({
-      create: { width: size, height: size, channels: 4, background: "#380109" },
+      create: { width: size, height: size, channels: 4, background: "#580A1A" },
     })
       .composite([{ input: mark, gravity: "centre" }])
       // Flatten: iOS composites a home-screen icon onto black, and some older
       // versions mishandle RGBA PNGs, so ship a plain opaque tile.
-      .flatten({ background: "#380109" })
+      .flatten({ background: "#580A1A" })
       .removeAlpha()
       .png({ compressionLevel: 9 })
       .toFile(out);

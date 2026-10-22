@@ -42,13 +42,13 @@ export default function PasswordGate() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full max-w-[420px] border border-gold/40 bg-[rgba(20,2,5,.7)] px-[clamp(24px,6vw,48px)] py-[clamp(32px,6vw,52px)] text-center shadow-[0_40px_80px_-30px_rgba(0,0,0,.7)]"
+        className="w-full max-w-[420px] border border-gold/40 bg-[rgba(38,4,13,.7)] px-[clamp(24px,6vw,48px)] py-[clamp(32px,6vw,52px)] text-center shadow-[0_40px_80px_-30px_rgba(0,0,0,.7)]"
       >
         <Logo variant="stacked" priority className="mx-auto mb-8 h-auto w-[200px]" />
         <p className="eyebrow m-0 mb-3 text-gold">Private preview</p>
         <h1
           id="gate-title"
-          className="m-0 mb-7 font-serif text-[28px] font-light italic leading-tight text-linen"
+          className="m-0 mb-7 font-serif text-[28px] font-light leading-tight text-linen"
         >
           Enter the password to continue.
         </h1>
@@ -75,7 +75,7 @@ export default function PasswordGate() {
           <p
             id="gate-error"
             role="alert"
-            className={`m-0 min-h-[18px] text-[12px] tracking-[0.06em] text-[#e8a0a0] ${error ? "" : "invisible"}`}
+            className={`m-0 min-h-[18px] text-[12px] tracking-[0.06em] text-[#E36A5A] ${error ? "" : "invisible"}`}
           >
             That password isn&apos;t right. Please try again.
           </p>

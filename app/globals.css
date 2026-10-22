@@ -1,20 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #F4EFE6;
-  --color-ivory: #F7F2E9;
-  --color-linen: #EFE3CE;
-  --color-stone: #D8D1C5;
-  --color-sand: #D9C4A9;
-  --color-gold: #DAB061;
-  --color-taupe: #8E6F57;
-  --color-clay: #6B4C3B;
-  --color-cocoa: #4A2E23;
-  --color-wine: #380109;
-  --color-ink: #241110;
+  /* Brand book: Deep Burgundy 60%, Gold 20%, Cream 10%, Charcoal 5%, Terracotta 5%. */
+  --color-wine: #580A1A;
+  --color-gold: #D4AF37;
+  --color-cream: #F8F6F1;
+  --color-ink: #1A1A1A;
+  --color-terracotta: #E36A5A;
 
-  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
+  /* Warm neutrals derived from the palette for backgrounds and secondary text. */
+  --color-ivory: #FCFAF6;
+  --color-linen: #F1EAE0;
+  --color-stone: #E6E0D6;
+  --color-sand: #EBE2D3;
+  --color-taupe: #8A5F57;
+  --color-clay: #6B4A47;
+  --color-cocoa: #4A2A2D;
+
+  /* Brand book: Minion Variable (primary) and Montserrat (secondary). Minion is an
+     Adobe font, so Crimson Text (the closest Google Font) stands in until it is licensed and self-hosted. */
+  --font-serif: var(--font-crimson), "Crimson Text", serif;
+  --font-sans: var(--font-montserrat), "Montserrat", sans-serif;
 
   --animate-scroll-hint: avScrollHint 2.6s ease-in-out infinite;
 
@@ -43,3 +49,6 @@ body {
   letter-spacing: 0.4em;
   text-transform: uppercase;
 }
+
+/* Brand type is upright Minion-style serif and Montserrat; no italics anywhere. */
+em, i, cite { font-style: normal; }

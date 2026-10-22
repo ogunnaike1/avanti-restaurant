@@ -5,12 +5,26 @@ import { motion } from "framer-motion";
 import ImageSlot from "./ImageSlot";
 import { menu, type MenuGroup } from "@/lib/menu";
 
-const filters = [
-  { id: "all", label: "All Items" },
-  ...menu.map((group) => ({ id: group.id, label: group.title })),
-] as const;
+/** Which side of the menu each section belongs to. Only soups are food so far. */
+const FOOD_GROUPS: MenuGroup["id"][] = ["soups"];
+const kindOf = (group: MenuGroup) => (FOOD_GROUPS.includes(group.id) ? "food" : "drinks");
 
-type FilterId = (typeof filters)[number]["id"];
+const foodGroups = menu.filter((group) => kindOf(group) === "food");
+const drinkGroups = menu.filter((group) => kindOf(group) === "drinks");
+
+type FilterId = "all" | "food" | "drinks" | MenuGroup["id"];
+type Filter = { id: FilterId; label: string };
+
+/** Quick filters first, then each section; used by the desktop chips. */
+const filters: Filter[] = [
+  { id: "all", label: "All Items" },
+  { id: "food", label: "Food" },
+  { id: "drinks", label: "Drinks" },
+  ...menu.map((group) => ({ id: group.id as FilterId, label: group.title })),
+];
+
+const groupFilters = (groups: MenuGroup[]): Filter[] =>
+  groups.map((group) => ({ id: group.id, label: group.title }));
 
 /** Fold case and accents, so "veloute" finds "Velouté" and "creme" finds "Crème". */
 const fold = (value: string) =>
@@ -59,7 +73,11 @@ export default function MenuBrowser() {
   /** Sections matching the chip, then items matching the search; empty sections drop out. */
   const groups: MenuGroup[] = useMemo(() => {
     const inSection =
-      active === "all" ? menu : menu.filter((group) => group.id === active);
+      active === "all"
+        ? menu
+        : active === "food" || active === "drinks"
+          ? menu.filter((group) => kindOf(group) === active)
+          : menu.filter((group) => group.id === active);
     if (!term) return inSection;
 
     return inSection
@@ -86,7 +104,45 @@ export default function MenuBrowser() {
     <>
       <div className="sticky top-[62px] z-40 border-b border-taupe/25 bg-cream/95 px-[clamp(20px,5vw,64px)] backdrop-blur">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-3 py-4 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
-          <div className="no-scrollbar -mb-1 flex gap-[clamp(18px,3vw,42px)] overflow-x-auto pb-1">
+          {/* Phones and tablets: a dropdown instead of a row that scrolls sideways. */}
+          <div className="relative w-full lg:hidden">
+            <select
+              value={active}
+              onChange={(event) => setActive(event.target.value as FilterId)}
+              aria-label="Filter the menu by category"
+              className="w-full appearance-none border border-taupe/40 bg-cream py-3 pl-4 pr-11 text-[11px] font-semibold uppercase tracking-[0.24em] text-wine outline-none transition-colors duration-300 focus:border-gold"
+            >
+              <option value="all">All Items</option>
+              <optgroup label="Food">
+                <option value="food">All Food</option>
+                {groupFilters(foodGroups).map((filter) => (
+                  <option key={filter.id} value={filter.id}>
+                    {filter.label}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Drinks">
+                <option value="drinks">All Drinks</option>
+                {groupFilters(drinkGroups).map((filter) => (
+                  <option key={filter.id} value={filter.id}>
+                    {filter.label}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden
+              className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-gold"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+
+          <div className="no-scrollbar -mb-1 hidden gap-[clamp(18px,3vw,42px)] overflow-x-auto pb-1 lg:flex">
             {filters.map((filter) => (
               <button
                 key={filter.id}

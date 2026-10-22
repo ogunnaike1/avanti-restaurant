@@ -79,7 +79,7 @@ export default function ReservationModal({
       transition={{ duration: 0.25 }}
     >
       <div
-        className="fixed inset-0 bg-[rgba(16,1,4,.72)] backdrop-blur-[3px]"
+        className="fixed inset-0 bg-[rgba(26,2,8,.72)] backdrop-blur-[3px]"
         onClick={onClose}
         aria-hidden
       />
@@ -92,7 +92,7 @@ export default function ReservationModal({
         initial={{ opacity: 0, y: 24, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        className="relative my-auto w-full max-w-[620px] border border-taupe/30 bg-cream px-[clamp(20px,4vw,44px)] pb-[clamp(28px,4vw,40px)] pt-[clamp(28px,4vw,40px)] shadow-[0_40px_90px_-40px_rgba(16,1,4,.8)]"
+        className="relative my-auto w-full max-w-[620px] border border-taupe/30 bg-cream px-[clamp(20px,4vw,44px)] pb-[clamp(28px,4vw,40px)] pt-[clamp(28px,4vw,40px)] shadow-[0_40px_90px_-40px_rgba(26,2,8,.8)]"
       >
         <button
           onClick={onClose}

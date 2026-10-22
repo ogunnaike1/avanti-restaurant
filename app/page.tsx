@@ -4,7 +4,7 @@ import ImageSlot from "@/components/ImageSlot";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import ReserveButton from "@/components/ReserveButton";
-import { signatures } from "@/lib/menu";
+import { BUSINESS_PROMISE, BUSINESS_TAGLINE } from "@/lib/business";
 
 export default function HomePage() {
   return (
@@ -18,7 +18,7 @@ export default function HomePage() {
             <h2 className="m-0 mb-7 font-serif text-[clamp(38px,5.4vw,74px)] font-light leading-[1.02] text-wine text-pretty">
               More than a meal.
               <br />
-              <em className="font-light">A place to unwind.</em>
+              <em className="font-light text-terracotta">A place to unwind.</em>
             </h2>
             <p className="m-0 mb-5 max-w-[54ch] text-base font-light leading-[1.9] text-cocoa text-pretty">
               Life moves quickly. Sometimes, the best thing you can do is slow down, settle in and
@@ -29,10 +29,14 @@ export default function HomePage() {
               surroundings to the atmosphere that welcomes you in, every visit offers an
               opportunity to step away from the everyday and enjoy time well spent.
             </p>
-            <p className="m-0 max-w-[54ch] font-serif text-[22px] italic leading-[1.5] text-wine text-pretty">
+            <p className="m-0 max-w-[54ch] font-serif text-[22px] leading-[1.5] text-wine text-pretty">
               Come for a meal. Stay for the conversations, the company and the moments that make
               the evening yours.
             </p>
+            <p className="m-0 mt-8 max-w-[54ch] border-t border-taupe/30 pt-6 text-[15px] font-light leading-[1.9] text-clay text-pretty">
+              {BUSINESS_PROMISE}
+            </p>
+            <p className="eyebrow m-0 mt-4 text-gold">{BUSINESS_TAGLINE}</p>
           </Reveal>
 
           <Reveal direction="right" className="relative">
@@ -47,66 +51,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-stone px-[clamp(20px,5vw,64px)] py-[clamp(84px,12vw,150px)]">
-        <div className="mx-auto max-w-[1240px]">
-          <Reveal className="mb-[clamp(40px,6vw,72px)] flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="eyebrow m-0 mb-4 text-taupe">Signature drinks</p>
-              <h2 className="m-0 font-serif text-[clamp(34px,4.8vw,64px)] font-light leading-[1.05] text-wine">
-                Four pours that
-                <br />
-                <em>define the house.</em>
-              </h2>
-            </div>
-            <Link
-              href="/menu"
-              className="border-b border-taupe pb-2 text-[10.5px] font-semibold uppercase tracking-[0.22em] text-wine transition-colors duration-300 hover:border-gold hover:text-taupe"
-            >
-              View the full menu
-            </Link>
-          </Reveal>
-
-          <div className="grid gap-[clamp(18px,2.4vw,32px)] sm:grid-cols-2 xl:grid-cols-4">
-            {signatures.map((dish, i) => (
-              <Reveal key={dish.id} delay={i * 0.09}>
-                <article className="group h-full border border-taupe/20 bg-cream transition-all duration-500 hover:-translate-y-1.5 hover:border-gold hover:shadow-[0_26px_50px_-30px_rgba(63,13,12,.55)]">
-                  <div className="aspect-4/5 overflow-hidden">
-                    <div className="h-full w-full transition-transform duration-700 group-hover:scale-105">
-                      <ImageSlot
-                        src={dish.image}
-                        label={dish.name}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                      />
-                    </div>
-                  </div>
-                  <div className="px-6 pb-7 pt-6">
-                    <p className="m-0 mb-2.5 text-[9.5px] uppercase tracking-[0.26em] text-gold">
-                      {dish.kicker}
-                    </p>
-                    <h3 className="m-0 mb-2.5 font-serif text-[27px] font-normal text-wine">
-                      {dish.name}
-                    </h3>
-                    <p className="m-0 mb-4 text-[13.5px] font-light leading-[1.75] text-clay">
-                      {dish.description}
-                    </p>
-                    <p className="m-0 text-[15px] tracking-[0.04em] text-taupe">{dish.price}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="relative flex min-h-[78vh] items-center overflow-hidden bg-wine">
         <Parallax className="absolute inset-0" strength={70}>
-          <ImageSlot src="/images/experience-table.jpg" label="A table laid with linen and glassware" />
+          <ImageSlot src="/images/hero-evening-bar.jpg" label="The bar, lit in the evening" position="50% 62%" />
         </Parallax>
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "linear-gradient(90deg,rgba(20,2,5,.86) 0%,rgba(20,2,5,.6) 48%,rgba(20,2,5,.4) 100%)",
+              "linear-gradient(90deg,rgba(70,6,20,.86) 0%,rgba(70,6,20,.6) 48%,rgba(70,6,20,.4) 100%)",
           }}
         />
         <Reveal className="relative mx-auto w-full max-w-[1240px] px-[clamp(20px,5vw,64px)] py-[clamp(80px,12vw,150px)]">
@@ -142,14 +95,14 @@ export default function HomePage() {
           <h2 className="m-0 mb-6 font-serif text-[clamp(40px,7vw,96px)] font-light leading-none text-wine">
             Something to
             <br />
-            <em>look forward to.</em>
+            <em className="text-terracotta">look forward to.</em>
           </h2>
           <p className="mx-auto mb-10 max-w-[48ch] text-base font-light leading-[1.9] text-clay">
             Good food has a way of bringing people together. Explore a menu that brings Nigerian
             and international cuisine to the table, with something to look forward to as you
             settle in and enjoy the experience.
           </p>
-          <p className="mx-auto mb-10 max-w-[48ch] font-serif text-xl italic text-wine">
+          <p className="mx-auto mb-10 max-w-[48ch] font-serif text-xl text-wine">
             Come curious. Find your favourites. Make a meal of it.
           </p>
           <Link
@@ -167,9 +120,9 @@ export default function HomePage() {
           <h2 className="m-0 mb-6 font-serif text-[clamp(36px,5.6vw,78px)] font-light leading-none text-wine">
             However you come,
             <br />
-            <em>make it a moment.</em>
+            <em className="text-terracotta">make it a moment.</em>
           </h2>
-          <p className="mx-auto mb-5 max-w-[48ch] font-serif text-xl italic text-wine">
+          <p className="mx-auto mb-5 max-w-[48ch] font-serif text-xl text-wine">
             Not every memorable evening needs a reason.
           </p>
           <p className="mx-auto mb-5 max-w-[52ch] text-base font-light leading-[1.9] text-cocoa text-pretty">
@@ -189,7 +142,7 @@ export default function HomePage() {
             <br />
             <em>awaits.</em>
           </h2>
-          <p className="mx-auto mb-4 max-w-[48ch] font-serif text-xl italic text-linen">
+          <p className="mx-auto mb-4 max-w-[48ch] font-serif text-xl text-linen">
             Good food. A beautiful setting. Time with your favourite people.
           </p>
           <p className="mx-auto mb-3 max-w-[48ch] text-base font-light leading-[1.9] text-stone">

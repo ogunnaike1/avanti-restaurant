@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import ImageSlot from "./ImageSlot";
-import Logo from "./Logo";
 import ReserveButton from "./ReserveButton";
 import { BUSINESS_LOCATION } from "@/lib/business";
 
@@ -18,7 +17,7 @@ const slides = [
   {
     id: "av-hero-2",
     src: "/images/hero-plated-dish.jpg",
-    label: "A signature plate going to the table",
+    label: "A plate going to the table",
     caption: "Nigerian & international cuisine",
   },
   {
@@ -52,7 +51,7 @@ export default function Hero() {
   return (
     <section
       aria-label="AVANTI"
-      className="relative flex min-h-[min(100svh,900px)] items-end overflow-hidden bg-wine"
+      className="relative flex min-h-[min(100svh,900px)] items-center overflow-hidden bg-wine"
     >
       <AnimatePresence>
         <motion.div
@@ -80,12 +79,12 @@ export default function Hero() {
           // Vertical scrim for the nav and the scroll cue, plus a left-hand scrim
           // so the gold mark and the copy keep their contrast over any photograph.
           background:
-            "linear-gradient(180deg,rgba(24,3,7,.74) 0%,rgba(24,3,7,.34) 38%,rgba(16,1,4,.92) 100%)," +
-            "linear-gradient(90deg,rgba(20,2,5,.78) 0%,rgba(20,2,5,.34) 46%,rgba(20,2,5,0) 78%)",
+            "linear-gradient(180deg,rgba(70,6,20,.74) 0%,rgba(70,6,20,.34) 38%,rgba(48,3,13,.92) 100%)," +
+            "linear-gradient(90deg,rgba(70,6,20,.78) 0%,rgba(70,6,20,.34) 46%,rgba(70,6,20,0) 78%)",
         }}
       />
 
-      <div className="relative mx-auto flex w-full max-w-[1240px] flex-col gap-6 px-[clamp(20px,5vw,64px)] pb-[clamp(56px,9vh,110px)] pt-[clamp(112px,16vh,168px)]">
+      <div className="relative mx-auto flex w-full max-w-[1240px] flex-col items-center gap-6 text-center px-[clamp(20px,5vw,64px)] pb-[clamp(56px,9vh,110px)] pt-[clamp(112px,16vh,168px)]">
         <AnimatePresence mode="wait">
           <motion.p
             key={slide.caption}
@@ -103,42 +102,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="m-0"
-        >
-          <Logo variant="stacked" priority className="h-auto w-[min(430px,74vw)]" />
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 26 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="m-0 max-w-[18ch] font-serif text-[clamp(24px,3.4vw,44px)] font-light italic leading-[1.15] text-linen"
+          className="m-0 font-serif text-[clamp(38px,7.6vw,118px)] font-light leading-[1.05] text-ivory text-balance sm:whitespace-nowrap"
         >
           A place to be.
           <br />
           A moment to savour.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.28 }}
-          className="m-0 max-w-[52ch] text-[clamp(14px,1.3vw,17px)] font-light leading-[1.85] text-stone text-pretty"
-        >
-          <span className="mb-3 block font-serif text-[clamp(18px,1.8vw,24px)] italic text-linen">
-            Some evenings deserve more than the usual.
-          </span>
-          Discover AVANTI Fine Dining, Ibadan, where exceptional surroundings, Nigerian and
-          international cuisine, and time well spent come together. Whether you&apos;re planning a
-          special celebration or simply looking for somewhere to unwind with the people who
-          matter, there&apos;s a place for you at AVANTI.
-        </motion.p>
+        </motion.h1>
 
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.4 }}
-          className="mt-2 flex flex-wrap gap-3.5"
+          className="mt-4 flex flex-wrap justify-center gap-3.5"
         >
           <Link
             href="/menu"
@@ -151,7 +126,7 @@ export default function Hero() {
           </ReserveButton>
         </motion.div>
 
-        <div className="mt-3.5 flex items-center gap-3.5">
+        <div className="mt-3.5 flex items-center justify-center gap-3.5">
           {slides.map((s, i) => (
             <button
               key={s.id}
