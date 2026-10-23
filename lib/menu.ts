@@ -7,8 +7,6 @@ export type MenuItem = {
   /** Selling price in naira, tax exclusive. */
   /** Omitted until the price is confirmed. */
   price?: string;
-  /** Several ways to buy the same thing, e.g. a measure or the bottle. Shown instead of `price`. */
-  options?: { label: string; price: string }[];
   /** Short menu blurb. */
   description?: string;
   /** Optional thumbnail; rows without one render without an image. */
@@ -20,7 +18,8 @@ export type MenuItem = {
 export type MenuGroup = {
   id:
     | "starters" | "ricepasta" | "soups" | "salads" | "burgers" | "platters" | "heritage" | "desserts" | "sides"
-    | "cocktails" | "mocktails" | "milkshakes" | "smoothies" | "spirits" | "wine" | "softdrinks";
+    | "cocktails" | "mocktails" | "smoothies" | "milkshakes" | "cognac" | "wine" | "whiskey" | "tequila"
+    | "champagne" | "gin" | "shots" | "water";
   title: string;
   items: MenuItem[];
 };
@@ -40,13 +39,12 @@ const item = (
 });
 
 /*
- * Food: the "Website Menu Copy" handoff (names, descriptions, prices). Drinks: the "Menu Pricing"
- * and "Wine, Spirits and Bottled Drinks" sheets (Menu name and Suggested menu price columns).
- * Not listed because the sheets give no price yet: Lemonade and Strawberry Lemonade
- * (still "SET PORTIONS"). Open points in the sheets: Black Russian (no coffee liqueur
- * stocked), Negroni (Campari and vermouth to be stocked), Four Cousins wine colour,
- * and whether Chi and Chivita juice are sold by the bottle or by the glass.
+ * Prices and descriptions come from the client's menu copy (food handoff, then the drinks lists).
+ * Dropped from the earlier sheets because the latest lists omit them: Tropical Long Island,
+ * Black Russian, Mango Smoothie, and the soft-drink and juice items. Lemonade and Strawberry
+ * Lemonade are not listed (no price).
  */
+
 export const menu: MenuGroup[] = [
   {
     id: "starters",
@@ -146,87 +144,123 @@ export const menu: MenuGroup[] = [
     id: "cocktails",
     title: "Cocktails",
     items: [
-      item("Mojito", "B01", 9000, "Cuban-style classic of white rum, fresh mint and lime, topped with soda."),
-      item("Piña Colada", "B02", 10500, "Creamy tropical blend of white rum, pineapple and coconut."),
-      item("Sex on the Beach", "B03", 9000, "Fruity and bright: vodka, orange and cranberry."),
-      item("Tequila Sunrise", "B04", 11500, "Tequila and orange juice with a sunset swirl of grenadine."),
-      item("Long Island", "B05", 15500, "Five spirits, lemon and cola in one bold, long drink."),
-      item("Margarita", "B06", 18500, "Tequila, orange liqueur and fresh lime, finished with a salted rim."),
-      item("Cosmopolitan", "B07", 13500, "Crisp vodka, cranberry and lime with a citrus lift."),
-      item("Daiquiri", "B08", 10000, "Clean and refreshing white rum with fresh lime."),
-      item("Tropical Long Island", "B09", 16000, "The Long Island with a fruity twist of pineapple and orange."),
-      item("Deep Blue Sea", "B10", 9500, "Vivid blue vodka cocktail with blue curaçao and pineapple."),
-      item("Whiskey Sour", "B12", 13500, "Whiskey balanced with fresh lemon, smooth and tangy."),
-      item("Pornstar Martini", "B13", 11500, "A chilled vodka martini with passion fruit."),
-      item("Negroni", "B14", 11500, "Gin, Campari and sweet vermouth: bittersweet and bold.", { image: "/images/menu-negroni.jpg" }),
-      item("Black Russian", "B15", 9000, "A vodka classic over ice, simple and smooth."),
-      item("Tropical Sunrise", "B16", 10000, "Vodka with orange and pineapple, finished with a grenadine glow."),
-      item("Mango Mule", "B17", 10500, "Mango and lime with a ginger beer kick."),
+      item("Mojito", undefined, 11000, "Cuban-style classic of white rum, fresh mint and lime, topped with soda."),
+      item("Piña Colada", undefined, 12000, "Creamy tropical blend of white rum, pineapple and coconut."),
+      item("Sex on the Beach", undefined, 10000, "Fruity and bright: vodka, orange and cranberry."),
+      item("Tequila Sunrise", undefined, 11500, "Tequila and orange juice with a sunset swirl of grenadine."),
+      item("Long Island", undefined, 12000, "Five spirits, lemon and cola in one bold, long drink."),
+      item("Margarita", undefined, 11000, "Tequila, orange liqueur and fresh lime, finished with a salted rim."),
+      item("Cosmopolitan", undefined, 12000, "Crisp vodka, cranberry and lime with a citrus lift."),
+      item("Daiquiri", undefined, 9000, "Clean and refreshing white rum with fresh lime."),
+      item("Deep Blue Sea", undefined, 10000, "Vivid blue vodka cocktail with blue curaçao and pineapple."),
+      item("Whiskey Sour", undefined, 11000, "Whiskey balanced with fresh lemon, smooth and tangy."),
+      item("Pornstar Martini", undefined, 11500, "A chilled vodka martini with passion fruit."),
+      item("Negroni", undefined, 11500, "Gin, Campari and sweet vermouth: bittersweet and bold.", { image: "/images/menu-negroni.jpg" }),
+      item("Tropical Sunrise", undefined, 10000, "Vodka with orange and pineapple, finished with a grenadine glow."),
+      item("Mango Mule", undefined, 10500, "Mango and lime with a ginger beer kick."),
     ],
   },
   {
     id: "mocktails",
     title: "Mocktails",
     items: [
-      item("Virgin Piña Colada", "B18", 4000, "All the pineapple and coconut, completely alcohol-free."),
-      item("Virgin Mojito", "B19", 1500, "Fresh mint and lime with soda, cool and alcohol-free."),
-      item("Chapman", "B20", 4000, "Nigeria’s favourite: Fanta and Sprite with grenadine, cucumber and citrus."),
-      item("Passion Fruit Cooler", "B23", 7500, "Tangy passion fruit and lime with a sparkling finish."),
-      item("Watermelon Mint Cooler", "B24", 2500, "Juicy watermelon, cool mint and lime, light and refreshing."),
-      item("Mint Storm", "B25", 1500, "A zesty burst of mint and lime with a fizzy finish."),
-    ],
-  },
-  {
-    id: "milkshakes",
-    title: "Milkshakes",
-    items: [
-      item("Vanilla Milkshake", "B26", 13000, "Thick, creamy vanilla topped with whipped cream."),
-      item("Strawberry Milkshake", "B29", 13000, "Strawberry ice cream blended thick and topped with whipped cream."),
-      item("Chocolate Milkshake", "B30", 13000, "Rich, indulgent chocolate blended thick and creamy."),
+      item("Virgin Piña Colada", undefined, 9000, "All the pineapple and coconut, completely alcohol-free."),
+      item("Virgin Mojito", undefined, 8000, "Fresh mint and lime with soda, cool and alcohol-free."),
+      item("Chapman", undefined, 8000, "Nigeria’s favourite: Fanta and Sprite with grenadine, cucumber and citrus."),
+      item("Passion Fruit Cooler", undefined, 7500, "Tangy passion fruit and lime with a sparkling finish."),
+      item("Watermelon Mint Cooler", undefined, 7000, "Juicy watermelon, cool mint and lime, light and refreshing."),
+      item("Mint Storm", undefined, 7000, "A zesty burst of mint and lime with a fizzy finish."),
+      item("Platter’s Punch", undefined, 9000, undefined),
     ],
   },
   {
     id: "smoothies",
     title: "Smoothies",
     items: [
-      item("Banana Smoothie", "B31", 15000, "Ripe banana blended with milk, yoghurt and honey."),
-      item("Strawberry Smoothie", "B32", 15000, "Fresh strawberries blended with milk, yoghurt and honey."),
-      item("Mango Smoothie", "B33", 9000, "Ripe mango blended with milk, yoghurt and honey."),
-      item("Pineapple Smoothie", "B34", 11500, "Sweet pineapple blended with milk, yoghurt and honey."),
+      item("Banana Smoothie", undefined, 9000, "Ripe banana blended with milk, yoghurt and honey."),
+      item("Strawberry Smoothie", undefined, 10000, "Fresh strawberries blended with milk, yoghurt and honey."),
+      item("Pineapple Smoothie", undefined, 8000, "Sweet pineapple blended with milk, yoghurt and honey."),
     ],
   },
   {
-    id: "spirits",
-    title: "Spirits",
+    id: "milkshakes",
+    title: "Milkshakes",
     items: [
-      item("Don Julio Tequila", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦37,500" }, { label: "Bottle", price: "₦562,500" }] }),
-      item("Casamigos Tequila", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦15,500" }, { label: "Bottle", price: "₦229,500" }] }),
-      item("Sierra Tequila", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦5,500" }, { label: "Bottle", price: "₦71,000" }] }),
-      item("Hennessy VSOP", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦18,000" }, { label: "Bottle", price: "₦246,000" }] }),
-      item("Absolut Vodka (Imported)", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦4,500" }, { label: "Bottle", price: "₦60,500" }] }),
-      item("Absolut Vodka (Plain)", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦4,500" }, { label: "Bottle", price: "₦60,500" }] }),
-      item("Gordon's Gin", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦3,000" }, { label: "Bottle", price: "₦41,000" }] }),
-      item("Bacardi White Rum", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦4,000" }, { label: "Bottle", price: "₦56,500" }] }),
-      item("Bacardi Gold Rum", undefined, undefined, undefined, { options: [{ label: "Shot", price: "₦4,000" }, { label: "Bottle", price: "₦56,500" }] }),
+      item("Vanilla Milkshake", undefined, 12000, "Thick, creamy vanilla topped with whipped cream."),
+      item("Strawberry Milkshake", undefined, 12000, "Strawberry ice cream blended thick and topped with whipped cream."),
+      item("Oreos Chocolate Milkshake", undefined, 11000, "Rich, indulgent chocolate blended thick and creamy with Oreo."),
+    ],
+  },
+  {
+    id: "cognac",
+    title: "Cognac",
+    items: [
+      item("Martell VS", undefined, 100000, undefined),
+      item("Hennessy VS", undefined, 100000, undefined),
+      item("Martell Blue Swift", undefined, 180000, undefined),
+      item("Hennessy VSOP", undefined, 200000, undefined),
     ],
   },
   {
     id: "wine",
-    title: "Wine & Champagne",
+    title: "Wine",
     items: [
-      item("Four Cousins Wine", undefined, undefined, undefined, { options: [{ label: "Glass", price: "₦3,500" }, { label: "Bottle", price: "₦41,000" }] }),
-      item("Moët Champagne", undefined, undefined, undefined, { options: [{ label: "Glass", price: "₦112,000" }, { label: "Bottle", price: "₦670,000" }] }),
+      item("Asconi Agor", undefined, 22000, undefined),
+      item("Four Cousins", undefined, 22000, undefined),
+      item("Carlo Rossi", undefined, 22000, undefined),
     ],
   },
   {
-    id: "softdrinks",
-    title: "Soft Drinks & Juice",
+    id: "whiskey",
+    title: "Whiskey",
     items: [
-      item("Coca-Cola", undefined, 1500, "50 cl bottle."),
-      item("Fanta Orange", undefined, 1500, "50 cl bottle."),
-      item("Sprite", undefined, 1500, "60 cl bottle."),
-      item("Chi Exotic Juice", undefined, 4500, "Pineapple, 1 L bottle."),
-      item("Chivita Juice", undefined, 5000, "Orange, 1 L bottle."),
+      item("Jameson Green", undefined, 60000, undefined),
+      item("Jameson Black Barrel", undefined, 85000, undefined),
+      item("Jack Daniel’s", undefined, 45000, undefined),
+      item("Glenfiddich 12", undefined, 145000, undefined),
+      item("Glenfiddich 15", undefined, 180000, undefined),
+    ],
+  },
+  {
+    id: "tequila",
+    title: "Tequila",
+    items: [
+      item("Olmeca Blanco", undefined, 60000, undefined),
+      item("Sierra Tequila Blanco Silver", undefined, 40000, undefined),
+      item("Casamigos Reposado", undefined, 250000, undefined),
+      item("Don Julio 1942 Añejo", undefined, 650000, undefined),
+    ],
+  },
+  {
+    id: "champagne",
+    title: "Champagne",
+    items: [
+      item("Moët Champagne", undefined, 200000, undefined),
+    ],
+  },
+  {
+    id: "gin",
+    title: "Gin",
+    items: [
+      item("Gordon’s Pink", undefined, 22000, undefined),
+    ],
+  },
+  {
+    id: "shots",
+    title: "Shots",
+    items: [
+      item("Tequila Shots", undefined, 5000, undefined),
+      item("Vodka Shots", undefined, 4000, undefined),
+      item("Whiskey Shots", undefined, 5000, undefined),
+    ],
+  },
+  {
+    id: "water",
+    title: "Water & Juice",
+    items: [
+      item("Bottled Water", undefined, 1500, undefined),
+      item("Cranberry Juice", undefined, 15000, undefined),
+      item("Juice Jar", undefined, 12000, undefined),
     ],
   },
 ];

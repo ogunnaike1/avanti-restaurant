@@ -298,18 +298,6 @@ export default function MenuBrowser() {
                         <h3 className="m-0 min-w-0 font-serif text-[19px] font-medium text-balance text-ink sm:text-[22px]">
                           <Highlight text={item.name} query={query} />
                         </h3>
-                        {item.options && (
-                          <div className="ml-auto flex shrink-0 gap-5 text-right">
-                            {item.options.map((option) => (
-                              <div key={option.label} className="flex flex-col items-end">
-                                <span className="text-[9px] uppercase tracking-[0.2em] text-taupe">
-                                  {option.label}
-                                </span>
-                                <span className="text-[15px] text-wine">{option.price}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
                         {item.price && (
                           <>
                             <span className="hidden -translate-y-1 flex-1 border-b border-dotted border-taupe/55 sm:block" />
