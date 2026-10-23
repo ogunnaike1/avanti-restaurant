@@ -8,13 +8,14 @@ import { menu, type MenuGroup } from "@/lib/menu";
 /** Which side of the menu each section belongs to. */
 const FOOD_GROUPS: MenuGroup["id"][] = [
   "starters",
+  "ricepasta",
   "soups",
   "salads",
   "burgers",
-  "pasta",
-  "sides",
   "platters",
+  "heritage",
   "desserts",
+  "sides",
 ];
 const kindOf = (group: MenuGroup) => (FOOD_GROUPS.includes(group.id) ? "food" : "drinks");
 

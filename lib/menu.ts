@@ -19,7 +19,7 @@ export type MenuItem = {
 
 export type MenuGroup = {
   id:
-    | "starters" | "soups" | "salads" | "burgers" | "pasta" | "sides" | "platters" | "desserts"
+    | "starters" | "ricepasta" | "soups" | "salads" | "burgers" | "platters" | "heritage" | "desserts" | "sides"
     | "cocktails" | "mocktails" | "milkshakes" | "smoothies" | "spirits" | "wine" | "softdrinks";
   title: string;
   items: MenuItem[];
@@ -40,8 +40,8 @@ const item = (
 });
 
 /*
- * Source: "Menu Pricing" and "Wine, Spirits and Bottled Drinks" sheets. Names are the
- * sheets' "Menu name" column and prices are their "Suggested menu price" column.
+ * Food: the "Website Menu Copy" handoff (names, descriptions, prices). Drinks: the "Menu Pricing"
+ * and "Wine, Spirits and Bottled Drinks" sheets (Menu name and Suggested menu price columns).
  * Not listed because the sheets give no price yet: Lemonade and Strawberry Lemonade
  * (still "SET PORTIONS"). Open points in the sheets: Black Russian (no coffee liqueur
  * stocked), Negroni (Campari and vermouth to be stocked), Four Cousins wine colour,
@@ -52,90 +52,94 @@ export const menu: MenuGroup[] = [
     id: "starters",
     title: "Starters",
     items: [
-      item("Charred Gizzard Skewers", "F12", 7500),
-      item("Prime Beef Kebab Skewers", "F13", 10500),
-      item("Signature Buffalo Wings", "F14", 15000),
-      item("Chef's Assorted Grill", "F15", 9500),
-      item("Golden Chicken Bites", "F16", 10500),
-      item("Crispy Popcorn Prawns", "F17", 15500),
-      item("Chicken Lollipop Drumsticks", "F24", 9000),
-      item("Signature Chicken Wings", "F18", 9500),
-      item("Golden Chicken Samosa", "F19", 5000),
-      item("Golden Shrimp Samosa", "F20", 7500),
-      item("Crispy Oriental Spring Rolls", "F21", 4500),
-      item("Prime Beef Suya", "F22", 13500),
-      item("Charcoal Chicken Suya", "F23", 8500),
+      item("Charred Gizzard Skewers", undefined, 8000, "Tender, seasoned gizzard pieces grilled on skewers for a flavourful bite"),
+      item("Prime Beef Kebab Skewers", undefined, 10500, "Succulent beef cubes, marinated in aromatic spices and grilled to perfection"),
+      item("Signature Buffalo Wings", undefined, 10000, "Crispy chicken wings tossed in a bold, tangy buffalo sauce"),
+      item("Chef’s Assorted Grill", undefined, 9500, "A flavourful selection of assorted meats, seasoned and grilled to perfection"),
+      item("Crispy Popcorn Prawns", undefined, 15000, "Bite-sized prawns, lightly seasoned, coated and fried until golden and crispy"),
+      item("Chicken Lollipop Drumsticks", undefined, 10000, "Crunchy chicken drumstick shaped for easy eating, seasoned and fried to golden perfection, served with garlic mayo/chilli pepper sauce"),
+      item("Signature Chicken Wings", undefined, 9500, "Juicy chicken wings, seasoned with aromatic spices and cooked to perfection"),
+      item("Golden Chicken Samosa", undefined, 5000, "Crispy pastry parcel filled with a savoury, spiced chicken filling, served with garlic mayo/spicy sauce"),
+      item("Crispy Oriental Spring Rolls", undefined, 4000, "Light, crispy pastry rolls filled with a delicious savoury mixture, served with garlic mayo or spicy sauce"),
+      item("Prime Beef Suya", undefined, 13500, "Tender beef slices coated in a rich, spicy suya blend and grilled to perfection, with a side of fries"),
+      item("Char Chicken Suya", undefined, 8500, "Succulent chicken pieces marinated in traditional suya spices and grilled for a smoky, flavourful finish"),
+    ],
+  },
+  {
+    id: "ricepasta",
+    title: "Rice and Pasta Dish",
+    items: [
+      item("Avanti Signature", undefined, 28000, "An Avanti original rice dish crafted with rich flavour, loaded with chicken and beef, served with juicy chicken and salad"),
+      item("Alfredo Pasta", undefined, 18000, "Creamy tagliatelle pasta tossed in a rich creamy sauce, for a smooth and delicious taste"),
+      item("Spaghetti Bolognese", undefined, 15000, "Pasta served with a tasty minced beef and tomato sauce"),
+      item("Seafood Stir Fry Pasta", undefined, 22000, "Pasta stir-fried with a mix of seafood, vegetables and delicious spices"),
+      item("Seafood Chinese Rice", undefined, 30000, "Chinese-style rice cooked with seafood, vegetables and tasty seasoning"),
     ],
   },
   {
     id: "soups",
     title: "Soups & Sauces",
     items: [
-      item("Velvet Chicken & Sweet Corn Soup", "F28", 15000),
-      item("Nigerian Catfish Pepper Broth", "F29", 22500),
-      item("Slow-Simmered Goat Pepper Broth", "F30", 9500),
-      item("Herbed Turkey Pepper Broth", "F31", 9500),
-      item("Signature Assorted Meat Pepper Broth", "F32", 9000),
-      item("Golden Chicken Curry", "F33", 11000),
-      item("Roasted Chicken in Garlic Velouté", "F34", 17500),
-      item("Pan-Seared Titus in Signature Sauce", "F35", 12000),
+      item("Velvet Chicken & Sweet Corn Soup", undefined, 10000, "A comforting blend of tender chicken, sweet corn and savoury broth"),
+      item("Nigerian Catfish Pepper Broth", undefined, 22500, "Fresh catfish simmered in a fragrant, spicy broth infused with traditional herbs and spices"),
+      item("Slow-Simmered Goat Pepper Broth", undefined, 10000, "Tender goat meat cooked in a rich, aromatic broth with traditional pepper soup spices"),
+      item("Signature Assorted Meat Pepper Broth", undefined, 10000, "A hearty combination of assorted meats simmered in a rich, spicy broth with traditional herbs and Avanti special spices"),
+      item("Golden Chicken Curry Sauce", undefined, 12000, "Tender chicken pieces cooked in a rich, aromatic curry sauce with a blend of savoury spices"),
+      item("Roasted Chicken in Garlic Velouté", undefined, 15000, "Juicy chicken prepared in a savoury garlic-infused sauce, with rich aromatic flavours"),
+      item("Pan-Seared Mackerel in Signature Sauce", undefined, 12000, "Mackerel cooked in a flavourful, well-seasoned sauce for a rich taste"),
     ],
   },
   {
     id: "salads",
     title: "Salads",
     items: [
-      item("Grilled Chicken Caesar", "F07", 14500),
-      item("Tropical Fruit Éclat", "F08", 9000),
-      item("Garden Harvest Salad", "F09", 5000),
-      item("Emerald Garden Salad", "F10", 3500),
+      item("Grilled Chicken Caesar", undefined, 15000, "Fresh lettuce topped with grilled chicken and creamy Caesar dressing"),
+      item("Tropical Fruit Éclat", undefined, 9000, "A refreshing mix of fresh, juicy seasonal fruits"),
+      item("Garden Harvest Salad", undefined, 6000, "A mix of fresh vegetables served with a delicious salad dressing"),
+      item("Emerald Garden Salad", undefined, 4000, "Fresh green vegetables tossed together for a light and refreshing meal"),
     ],
   },
   {
     id: "burgers",
-    title: "Burgers",
+    title: "Burgers & Bites",
     items: [
-      item("The Signature Prime Beef Burger", "F11", 18000),
-      item("Golden Crispy Chicken Burger", "F25", 11500),
-      item("The Double Agent", "F26", 25000),
-    ],
-  },
-  {
-    id: "pasta",
-    title: "Pasta",
-    items: [
-      item("Alfredo Pasta", "F36", 29500),
-      item("Bolognese", "F37", 9500),
-      item("Seafood Penne Pasta", "F46", 24000),
-      item("Meatball Pasta", "F47", 33500),
-    ],
-  },
-  {
-    id: "sides",
-    title: "Sides",
-    items: [
-      item("Jollof Rice", "F38", 5500),
-      item("Seafood Chinese Rice", "F48", 38500),
-      item("Chips", "F49", 4500),
-      item("Fried Plantain", "F50", 5500),
+      item("The Signature Prime Beef Burger", undefined, 16000, "Juicy beef patty in a soft burger bun with fresh vegetables, delicious sauce and melted cheese, served with a side of fries"),
+      item("Golden Crispy Chicken Burger", undefined, 11500, "Crispy golden chicken in a soft burger bun with fresh vegetables, delicious sauce and melted cheese, served with a side of fries"),
+      item("The Double Agent", undefined, 22000, "Two layers of juicy chicken or beef in a soft burger bun with fresh vegetables, delicious sauce and melted cheese, served with a side of fries"),
     ],
   },
   {
     id: "platters",
     title: "Platters",
     items: [
-      item("The Grand Ocean Platter", "F04", 70000),
-      item("The Signature Feast Platter", "F05", 39500),
-      item("The Royal Grill Platter", "F06", 43000),
+      item("The Grand Ocean Platter", undefined, 95000, "Seafood platter: a mix of prawns, shrimp samosa, grilled calamari rings, crab and lobsters, served with garlic dip and sweet corn as fries, or plantain as a side"),
+      item("The Signature Feast Platter", undefined, 55000, "A delicious mix of assorted meats, chicken wings, spring rolls and other tasty bites, grilled and seasoned to perfection"),
+      item("The Royal Grill Platter", undefined, 45000, "A mouthwatering selection of assorted meats, grilled and seasoned with rich, delicious spices"),
+    ],
+  },
+  {
+    id: "heritage",
+    title: "Nigerian Heritage",
+    items: [
+      item("Premium Seafood Okro", undefined, 28000, "Rich, flavourful okro soup with assorted seafood, served with poundo yam"),
     ],
   },
   {
     id: "desserts",
     title: "Desserts",
     items: [
-      item("Velvet Crêpe", "F01", 8000),
-      item("Strawberry Caramel Royale", "F02", 10500),
-      item("Madagascan Vanilla Éclat", "F03", 10000),
+      item("Velvet Crêpe", undefined, 10000, "Classic crêpe"),
+      item("Strawberry Caramel Royale", undefined, 11500, "Strawberry caramel cake"),
+      item("Classic Velvet Vanilla", undefined, 10000, "Vanilla cake"),
+    ],
+  },
+  {
+    id: "sides",
+    title: "Sides",
+    items: [
+      item("Plantain", undefined, 5000, "Deep-fried plantain slices"),
+      item("Crispy Chips", undefined, 4500, "Deep-fried golden Yukon potato chips"),
+      item("Smoky Jollof", undefined, 7000, "Rich, flavourful, classic Nigerian jollof rice with a delicious smoky taste"),
     ],
   },
   {
