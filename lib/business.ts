@@ -9,6 +9,8 @@ export const BUSINESS_SEATS = 70;
 export const SOCIAL_HANDLE = "the_avanti_restaurant";
 export const INSTAGRAM_URL = `https://www.instagram.com/${SOCIAL_HANDLE}`;
 export const TIKTOK_URL = `https://www.tiktok.com/@${SOCIAL_HANDLE}`;
+export const BUSINESS_EMAIL = "theavantirestaurant.com@gmail.com";
+export const BUSINESS_EMAIL_HREF = `mailto:${BUSINESS_EMAIL}`;
 export const BUSINESS_ADDRESS =
   "Kamtai Suite, Alegongo Shopping Mall, Akobo, Ibadan, Oyo State, Nigeria.";
 export const BUSINESS_LOCATION = "Akobo, Ibadan";

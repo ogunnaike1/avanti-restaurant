@@ -5,6 +5,8 @@ import { whatsappHref, whatsappNumber } from "@/components/WhatsAppButton";
 import ReservationForm from "@/components/ReservationForm";
 import {
   BUSINESS_ADDRESS,
+  BUSINESS_EMAIL,
+  BUSINESS_EMAIL_HREF,
   BUSINESS_HOURS,
   BUSINESS_HOURS_DAYS,
   BUSINESS_SEATS,
@@ -26,6 +28,7 @@ const details = [
   { label: "Seating", lines: [`${BUSINESS_SEATS} seats`] },
   { label: "Telephone", lines: [BUSINESS_PHONE_DISPLAY], href: BUSINESS_PHONE_HREF },
   { label: "WhatsApp", lines: [whatsappNumber], href: whatsappHref, external: true },
+  { label: "Email", lines: [BUSINESS_EMAIL], href: BUSINESS_EMAIL_HREF },
   { label: "Instagram", lines: [`@${SOCIAL_HANDLE}`], href: INSTAGRAM_URL, external: true },
   { label: "TikTok", lines: [`@${SOCIAL_HANDLE}`], href: TIKTOK_URL, external: true },
 ];
